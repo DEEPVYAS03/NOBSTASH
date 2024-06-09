@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Sidebar from './Sidebar';
+import Sidebar from '../../components/Sidebar';
 import axios from 'axios';
 
 const ManageFAQs = () => {
@@ -42,7 +42,6 @@ const ManageFAQs = () => {
 
   return (
     <div className="flex">
-      <Sidebar />
       <div className="flex-1 p-6">
         {/* Post FAQ */}
         <div className="mb-8">

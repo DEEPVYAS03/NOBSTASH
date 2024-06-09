@@ -1,15 +1,31 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import FAQ from './components/FAQ';
-import ManageFAQs from './components/ManageFAQs';
+import FAQ from './pages/FAQs/FAQ';
+import ManageFAQs from './pages/FAQs/ManageFAQs';
+import AuctionCenter from './pages/AuctionCenter/AuctionCenter'; 
+import HostAuction from './pages/AuctionCenter/HostAuction';
+import Sidebar from './components/Sidebar'; 
+import Header from './components/Header';
+import AuctionRegister from './pages/AuctionCenter/AuctionRegister';
 
 const App = () => {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<FAQ />} />
-        <Route path="/manage-faqs" element={<ManageFAQs />} />
-      </Routes>
+      <div className="flex flex-col h-screen">
+        <Header />
+        <div className="flex flex-1 overflow-hidden">
+          <Sidebar />
+          <div className="flex-1 overflow-auto">
+            <Routes>
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/manage-faqs" element={<ManageFAQs />} />
+              <Route path="/center" element={<AuctionCenter />} /> 
+              <Route path="/host" element={<HostAuction />} /> 
+              <Route path='/auction-register' element={<AuctionRegister />} />
+            </Routes>
+          </div>
+        </div>
+      </div>
     </Router>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Sidebar from './Sidebar';
+import Sidebar from '../../components/Sidebar';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
@@ -26,9 +26,8 @@ const FAQ = () => {
   };
 
   return (
-    <div className="flex">
-      <Sidebar />
-      <div className="flex-1 p-6 bg-gray-50">
+    <div className="flex ">
+      <div className="flex-1 p-6 ">
         <h2 className="text-xl font-bold mb-4 pl-2 pb-4 border-black border-b-2">Frequently Asked Questions</h2>
         {faqs.map((faq) => (
           <div key={faq.position} className="mb-2">
