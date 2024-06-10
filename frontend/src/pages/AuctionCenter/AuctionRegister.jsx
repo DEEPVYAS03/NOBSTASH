@@ -48,7 +48,7 @@ const AuctionRegister = () => {
   };
 
   return (
-    <div className="p-1 px-16">
+    <div className="p-4 sm:px-8 md:px-16">
       {/* Heading */}
       <div className="border-b-2 border-black p-2">
         <div className="text-xl">
@@ -57,25 +57,25 @@ const AuctionRegister = () => {
         </div>
       </div>
 
-      <form className="mt-2" onSubmit={handleSubmit}>
+      <form className="mt-4" onSubmit={handleSubmit}>
         {/* Auction ID */}
-        <div className="flex flex-row ml-8 items-center">
-          <label className="block w-2/12 font-semibold">Auction ID</label>
+        <div className="flex flex-col md:flex-row md:ml-8 items-center mb-2">
+          <label className="block w-full md:w-2/12 font-semibold">Auction ID</label>
           <input
             type="text"
             placeholder={auctionID}
             disabled
-            className="w-6/12 mt-2 p-1 px-2 border border-gray-300 rounded-md bg-gray-100 cursor-not-allowed"
+            className="w-full md:w-6/12 mt-2 p-1 px-2 border border-gray-300 rounded-md bg-gray-100 cursor-not-allowed"
           />
         </div>
 
         {/* Delivery Address */}
-        <div className="text-lg font-bold mt-2">Delivery Address *</div>
+        <div className="text-lg font-bold mt-4">Delivery Address *</div>
 
         {/* State */}
-        <div className="flex flex-row mb-1 mt-2 ml-8 items-center">
-          <label className="block w-2/12 font-semibold">State</label>
-          <div className="w-6/12 mt-2">
+        <div className="flex flex-col md:flex-row mb-2 mt-2 md:ml-8 items-center">
+          <label className="block w-full md:w-2/12 font-semibold">State</label>
+          <div className="w-full md:w-6/12 mt-2">
             <select
               value={state}
               onChange={(e) => setState(e.target.value)}
@@ -92,57 +92,57 @@ const AuctionRegister = () => {
         </div>
 
         {/* Pincode */}
-        <div className="flex flex-row mb-1 ml-8 items-center">
-          <label className="block font-semibold w-2/12">Pincode</label>
+        <div className="flex flex-col md:flex-row mb-2 md:ml-8 items-center">
+          <label className="block font-semibold w-full md:w-2/12">Pincode</label>
           <input
             type="number"
             value={pincode}
             onChange={(e) => setPincode(e.target.value)}
             placeholder="Pincode"
-            className="w-6/12 mt-2 p-1 px-2 border border-gray-300 rounded-md"
+            className="w-full md:w-6/12 mt-2 p-1 px-2 border border-gray-300 rounded-md"
           />
         </div>
 
         {/* Address */}
-        <div className="flex flex-row mb-1 ml-8 items-center">
-          <label className="block font-semibold w-2/12">Address</label>
+        <div className="flex flex-col md:flex-row mb-2 md:ml-8 items-center">
+          <label className="block font-semibold w-full md:w-2/12">Address</label>
           <input
             type="text"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             placeholder="Address"
-            className="w-6/12 mt-2 p-1 px-2 border border-gray-300 rounded-md"
+            className="w-full md:w-6/12 mt-2 p-1 px-2 border border-gray-300 rounded-md"
           />
         </div>
 
         {/* Mobile Number */}
-        <div className="flex flex-row mb-1 ml-8 items-center">
-          <label className="block font-semibold w-2/12">Mobile Number</label>
+        <div className="flex flex-col md:flex-row mb-2 md:ml-8 items-center">
+          <label className="block font-semibold w-full md:w-2/12">Mobile Number</label>
           <input
             type="number"
             value={mobileNumber}
             onChange={(e) => setMobileNumber(e.target.value)}
             placeholder="Mobile Number"
-            className="w-6/12 mt-2 p-1 px-2 border border-gray-300 rounded-md"
+            className="w-full md:w-6/12 mt-2 p-1 px-2 border border-gray-300 rounded-md"
           />
         </div>
 
         {/* Email */}
-        <div className="flex flex-row mb-1 ml-8 items-center">
-          <label className="block font-semibold w-2/12">Email</label>
+        <div className="flex flex-col md:flex-row mb-2 md:ml-8 items-center">
+          <label className="block font-semibold w-full md:w-2/12">Email</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
-            className="w-6/12 mt-2 p-1 px-2 border border-gray-300 rounded-md"
+            className="w-full md:w-6/12 mt-2 p-1 px-2 border border-gray-300 rounded-md"
           />
         </div>
 
         {/* Bidder ID */}
-        <div className="text-lg font-bold mt-3">Bidder ID</div>
-        <div className="flex flex-row mb-2 ml-8 items-center">
-          <div className="w-6/12 mt-2">
+        <div className="text-lg font-bold mt-4">Bidder ID</div>
+        <div className="flex flex-col md:flex-row mb-4 md:ml-8 items-center">
+          <div className="w-full md:w-6/12 mt-2">
             <div className="flex items-center mb-2">
               <input
                 type="checkbox"
@@ -165,8 +165,8 @@ const AuctionRegister = () => {
         </div>
 
         {/* Agreement */}
-        <div className="flex flex-row mb-2 mt-3 items-center">
-          <div className="w-6/12 mt-2">
+        <div className="flex flex-col md:flex-row mb-4 mt-3 md:ml-8 items-center">
+          <div className="mt-2 w-full md:w-6/12">
             <div className="flex items-center">
               <input
                 type="checkbox"
@@ -189,25 +189,25 @@ const AuctionRegister = () => {
         </div>
 
         {/* Message from Seller */}
-        <div className="flex flex-row mb-4 items-center">
-          <label className="block font-semibold w-2/12">Message from Seller</label>
+        <div className="flex flex-col md:flex-row mb-4 md:ml-8 items-center">
+          <label className="block font-semibold w-full md:w-2/12">Message from Seller</label>
           <input
             type="text"
             placeholder="display message given by seller/host (*not an input field)"
             disabled
-            className="w-6/12 mt-2 p-1 px-2 border border-gray-300 rounded-md bg-gray-100 cursor-not-allowed"
+            className="w-full md:w-6/12 mt-2 p-1 px-2 border border-gray-300 rounded-md bg-gray-100 cursor-not-allowed"
           />
         </div>
 
         {/* Register Button */}
-        <div className="flex flex-row items-center">
+        <div className="flex flex-col md:flex-row items-center mb-4 md:ml-8">
           <button
             type="submit"
-            className="w-2/12 h-14 mt-2 p-2 bg-black text-white rounded-md font-bold cursor-pointer"
+            className="w-full md:w-2/12 h-14 mt-2 p-2 bg-black text-white rounded-md font-bold cursor-pointer"
           >
             Register
           </button>
-          <div className="w-6/12 ml-12 font-semibold">
+          <div className="w-full md:w-6/12 md:ml-12 mt-4 md:mt-0 font-semibold">
             <span>*delivery address should be in serviceable locations for seller</span>
             <br />
             <span>*only KYC completed users can BID</span>
