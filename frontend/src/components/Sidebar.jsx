@@ -29,7 +29,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           className={`flex items-center cursor-pointer ${
             activeItem === 'home' ? 'font-bold' : 'hover:font-bold'
           }`}
-          onClick={() => handleItemClick('home', '/')}
+          onClick={() => handleItemClick('home', '/home')}
         >
           {activeItem === 'home' ? <IoHome className="text-2xl" /> : <IoHomeOutline className="text-2xl" />}
           <span className="ml-3 hidden lg:inline">Home</span>

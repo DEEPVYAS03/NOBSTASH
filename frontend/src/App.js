@@ -7,6 +7,7 @@ import HostAuction from './pages/AuctionCenter/HostAuction';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import AuctionRegister from './pages/AuctionCenter/AuctionRegister';
+import BiddingHome from './pages/Home/BiddingHome';
 
 const App = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -28,6 +29,7 @@ const App = () => {
               <Route path="/center" element={<AuctionCenter />} />
               <Route path="/host" element={<HostAuction />} />
               <Route path='/auction-register' element={<AuctionRegister />} />
+              <Route path='/home' element={<BiddingHome />} />
             </Routes>
           </div>
         </div>

@@ -18,7 +18,7 @@ const BiddingHistory = () => {
         <img
           src={painting}
           alt="Oil Painting"
-          className="w-full md:w-60 h-60 md:h-auto object-cover border-2 rounded-lg cursor-pointer"
+          className="w-full md:w-60 h-60 md:h-auto object-fill border-2 rounded-lg cursor-pointer"
           onClick={handleImageClick}
         />
         <div className="flex flex-col justify-between mt-4 md:mt-0 md:ml-4 flex-1">

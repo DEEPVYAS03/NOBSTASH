@@ -28,14 +28,14 @@ const AuctionCenter = () => {
         <div className="font-bold text-xl mt-6 border-black border-b-2 max-w-6/12 p-2">
           Auction Center
         </div>
-        <div className="flex flex-wrap justify-start gap-4 mt-5 border-black pb-3 border-b-2">
+        <div className="flex flex-row flex-wrap justify-start gap-4 mt-5 border-black pb-3 border-b-2">
           <button
             onClick={() => setActiveComponent("HostAuction")}
             className={`p-3 sm:p-4 md:p-5 lg:p-5 border-black border-2 rounded-lg font-bold ${
               activeComponent === "HostAuction"
                 ? "bg-black text-white"
                 : "bg-white hover:bg-gray-100"
-            } w-full sm:w-auto`}
+            }`}
           >
             Host Auction
           </button>
@@ -45,7 +45,7 @@ const AuctionCenter = () => {
               activeComponent === "AuctionHistory"
                 ? "bg-black text-white"
                 : "bg-white hover:bg-gray-100"
-            } w-full sm:w-auto`}
+            }`}
           >
             Auction History
           </button>
@@ -55,7 +55,7 @@ const AuctionCenter = () => {
               activeComponent === "BiddingHistory"
                 ? "bg-black text-white"
                 : "bg-white hover:bg-gray-100"
-            } w-full sm:w-auto`}
+            }`}
           >
             Bidding History
           </button>
@@ -65,7 +65,7 @@ const AuctionCenter = () => {
               activeComponent === "Settlements"
                 ? "bg-black text-white"
                 : "bg-white hover:bg-gray-100"
-            } w-full sm:w-auto`}
+            }`}
           >
             Settlements
           </button>

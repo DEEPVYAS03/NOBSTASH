@@ -53,6 +53,11 @@ const HostAuction = () => {
   const [consignorAgreement, setConsignorAgreement] = useState(null);
   const [termsConditions, setTermsConditions] = useState(null);
   const [conditionReport, setConditionReport] = useState(null);
+  const [error, setError] = useState(null);
+
+  const allowedImageTypes = ["jpg", "jpeg", "png", "gif", "bmp", "tiff", "webp", "svg", "heic"];
+  const allowedVideoTypes = ["mp4", "avi", "mov", "wmv", "flv", "mkv", "webm", "mpeg", "mpg", "3gp", "m4v"];
+  const allowedDocumentTypes = ["pdf", "doc", "docx", "txt"];
 
   const handleQuestionClick = (text) => {
     setTooltip(text);
@@ -62,14 +67,23 @@ const HostAuction = () => {
     setTooltip(null);
   };
 
-  const handleFileChange = (event, setter) => {
-    setter(event.target.files[0]);
+  const handleFileChange = (event, setter, allowedTypes) => {
+    const file = event.target.files[0];
+    const fileExtension = file.name.split(".").pop().toLowerCase();
+    if (!allowedTypes.includes(fileExtension)) {
+      setError(`Invalid file type. Allowed types: ${allowedTypes.join(", ")}`);
+      event.target.value = null;
+      window.alert("Invalid file type. Allowed types: " + allowedTypes.join(", "));
+    } else {
+      setError(null);
+      setter(file);
+    }
   };
 
   return (
     <div>
       {/* first view */}
-      <div className="max-w-7xl mx-auto ">
+      <div className="max-w-7xl mx-auto">
         <h1 className="text-xl p-3 font-bold border-b-2 border-black">
           Host Auction
         </h1>
@@ -82,7 +96,6 @@ const HostAuction = () => {
             </span>
 
             <div className="flex flex-col min-w-full gap-1 mt-2 p-1">
-              
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
                 <label className="block font-semibold sm:w-1/4">Title</label>
                 <div className="flex items-center w-full sm:w-3/4">
@@ -103,9 +116,7 @@ const HostAuction = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
-                <label className="block font-semibold sm:w-1/4">
-                  Host Name
-                </label>
+                <label className="block font-semibold sm:w-1/4">Host Name</label>
                 <div className="flex items-center w-full sm:w-3/4">
                   <input
                     type="text"
@@ -123,9 +134,7 @@ const HostAuction = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
-                <label className="block font-semibold sm:w-1/4">
-                  Auction ID
-                </label>
+                <label className="block font-semibold sm:w-1/4">Auction ID</label>
                 <div className="flex items-center w-full sm:w-3/4">
                   <input
                     type="text"
@@ -145,9 +154,7 @@ const HostAuction = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
-                <label className="block font-semibold sm:w-1/4">
-                  Description
-                </label>
+                <label className="block font-semibold sm:w-1/4">Description</label>
                 <div className="flex items-center w-full sm:w-3/4">
                   <input
                     type="text"
@@ -168,9 +175,7 @@ const HostAuction = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
-                <label className="block font-semibold sm:w-1/4">
-                  Reserve Price
-                </label>
+                <label className="block font-semibold sm:w-1/4">Reserve Price</label>
                 <div className="flex items-center w-full sm:w-3/4">
                   <input
                     type="number"
@@ -237,9 +242,7 @@ const HostAuction = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
-                <label className="block font-semibold sm:w-1/4">
-                  Start Date
-                </label>
+                <label className="block font-semibold sm:w-1/4">Start Date</label>
                 <div className="flex items-center w-full sm:w-3/4">
                   <input
                     type="date"
@@ -260,9 +263,7 @@ const HostAuction = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
-                <label className="block font-semibold sm:w-1/4">
-                  Start Time
-                </label>
+                <label className="block font-semibold sm:w-1/4">Start Time</label>
                 <div className="flex items-center w-full sm:w-3/4">
                   <input
                     type="time"
@@ -364,7 +365,6 @@ const HostAuction = () => {
             </div>
           </div>
 
-
           {/* Upload Documents Section */}
           <div className="w-full md:w-1/3 p-4">
             <span className="text-xl font-semibold mb-4 border-b-2 px-2 border-black">
@@ -383,7 +383,7 @@ const HostAuction = () => {
                   id="images"
                   accept=".jpg, .jpeg, .png, .gif, .bmp, .tiff, .webp, .svg, .heic"
                   className="hidden"
-                  onChange={(e) => handleFileChange(e, setImages)}
+                  onChange={(e) => handleFileChange(e, setImages, allowedImageTypes)}
                 />
                 {images && (
                   <div className="mt-2 flex items-center justify-between">
@@ -412,7 +412,7 @@ const HostAuction = () => {
                   id="videos"
                   accept=".mp4, .avi, .mov, .wmv, .flv, .mkv, .webm, .mpeg, .mpg, .3gp, .m4v"
                   className="hidden"
-                  onChange={(e) => handleFileChange(e, setVideos)}
+                  onChange={(e) => handleFileChange(e, setVideos, allowedVideoTypes)}
                 />
                 {videos && (
                   <div className="mt-2 flex items-center justify-between">
@@ -441,7 +441,7 @@ const HostAuction = () => {
                   id="provenanceDocuments"
                   accept=".pdf, .doc, .docx, .txt"
                   className="hidden"
-                  onChange={(e) => handleFileChange(e, setProvenanceDocuments)}
+                  onChange={(e) => handleFileChange(e, setProvenanceDocuments, allowedDocumentTypes)}
                 />
                 {provenanceDocuments && (
                   <div className="mt-2 flex items-center justify-between">
@@ -470,7 +470,7 @@ const HostAuction = () => {
                   id="consignorAgreement"
                   accept=".pdf, .doc, .docx, .txt"
                   className="hidden"
-                  onChange={(e) => handleFileChange(e, setConsignorAgreement)}
+                  onChange={(e) => handleFileChange(e, setConsignorAgreement, allowedDocumentTypes)}
                 />
                 {consignorAgreement && (
                   <div className="mt-2 flex items-center justify-between">
@@ -499,7 +499,7 @@ const HostAuction = () => {
                   id="termsConditions"
                   accept=".pdf, .doc, .docx, .txt"
                   className="hidden"
-                  onChange={(e) => handleFileChange(e, setTermsConditions)}
+                  onChange={(e) => handleFileChange(e, setTermsConditions, allowedDocumentTypes)}
                 />
                 {termsConditions && (
                   <div className="mt-2 flex items-center justify-between">
@@ -528,7 +528,7 @@ const HostAuction = () => {
                   id="conditionReport"
                   accept=".pdf, .doc, .docx, .txt"
                   className="hidden"
-                  onChange={(e) => handleFileChange(e, setConditionReport)}
+                  onChange={(e) => handleFileChange(e, setConditionReport, allowedDocumentTypes)}
                 />
                 {conditionReport && (
                   <div className="mt-2 flex items-center justify-between">
@@ -563,6 +563,22 @@ const HostAuction = () => {
             </div>
           </div>
         )}
+
+        {/* {error && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="bg-white p-6 rounded shadow-lg max-w-md">
+              <div className="flex justify-end">
+                <button
+                  onClick={() => setError(null)}
+                  className="text-gray-500 hover:text-gray-700 transition duration-150 ease-in-out"
+                >
+                  &times;
+                </button>
+              </div>
+              <p className="text-gray-700">{error}</p>
+            </div>
+          </div>
+        )} */}
       </div>
 
       {/* second view */}
