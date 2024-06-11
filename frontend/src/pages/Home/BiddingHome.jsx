@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import painting from "../../assets/painting.jpg";
 import Image from "../../assets/WIN_20240517_10_43_20_Pro.jpg";
 
@@ -6,25 +6,41 @@ const BiddingHome = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isTopBiddersOpen, setIsTopBiddersOpen] = useState(false);
   const [isBidOpen, setIsBidOpen] = useState(false);
+  const [isAnyOpen, setIsAnyOpen] = useState(false);
 
   const toggleDiv = () => {
     setIsOpen(!isOpen);
+   
   };
 
   const toggleTopBidders = () => {
     setIsTopBiddersOpen(!isTopBiddersOpen);
+    
   };
 
   const toggleBid = () => {
     setIsBidOpen(!isBidOpen);
   };
 
+  useEffect(() => {
+    if (isBidOpen || isTopBiddersOpen || isOpen) {
+      setIsAnyOpen(true);
+    } else {
+      setIsAnyOpen(false);
+    }
+  }, [isBidOpen, isTopBiddersOpen, isOpen]);
+
+
   return (
-    <div className="flex flex-col mt-4 mb-10 lg:flex-row lg:pt-2 lg:mb-0 lg:mt-2">
+    <div
+      className={`flex flex-col mt-4 mb-10 sm:flex-row sm:pt-2 sm:mb-0 sm:mt-2 sm:p-4`}
+    >
       {/* medium size */}
-      <div className="sm:flex sm:justify-between sm:px-6 sm:mb-4 lg:flex-col lg:w-1/2 lg:items-center lg:mb-0 lg:justify-normal">
+      <div
+        className={`${isAnyOpen ? "flex flex-row ":" "} sm:flex-col sm:w-1/2 sm:items-center sm:mb-0 sm:justify-normal`}
+      >
         {/* Image */}
-        <div className="w-9/12 sm:w-4/12 sm:h-[17rem] h-[25rem] mx-auto mb-2 lg:mx-0 lg:w-9/12 lg:h-[27rem] lg:mb-2">
+        <div className={`sm:w-10/12 lg:w-9/12 ${isAnyOpen?"w-[12rem] h-[12rem] mx-auto mr-0":"mx-auto"}  w-9/12  h-[25rem] sm:mx-auto mb-2 sm:w-8/12 sm:h-[22rem] sm:mb-2 `}>
           <img
             src={painting}
             alt="Oil Painting"
@@ -32,19 +48,16 @@ const BiddingHome = () => {
           />
         </div>
         {/* Description */}
-        <div className="w-9/12 sm:w-5/12  sm:-ml-8 sm:px-3  px-8 py-2 bg-white mx-auto rounded-lg shadow-lg border-gray-200 border-2 mb-2 lg:w-9/12 lg:mx-8 ">
-          <h2 className="text-lg sm:mb font-bold">
-            Oil Painting by Famous Artist
-          </h2>
-          <p className="sm:mb-4 lg:mb-0">It's a picture of a person</p>
-          <p className="font-semibold sm:mb-4 lg:mb-0">Auction ID - xxxxxx</p>
+        <div className={`sm:w-10/12 lg:w-9/12 h-fit ${isAnyOpen?"w-[18rem] h-[12rem] mx-auto ml-2":"w-9/12 mx-auto "}  px-8 py-4  bg-white sm:mx-auto rounded-lg shadow-lg border-gray-200 border-2 mb-2 `}>
+          <h2 className="text-lg  font-bold">Oil Painting by Famous Artist</h2>
+          <p className="=sm:mb-0">It's a picture of a person</p>
+          <p className="font-semibold sm:mb-0">Auction ID - xxxxxx</p>
           <p className="font-bold">Available Quantity: 3</p>
-          <p className="text-gray-600 sm:mt-14 cursor-pointer lg:mt-0">more info...</p>
+          <p className="text-gray-600 cursor-pointer sm:mt-0">more info...</p>
         </div>
-      
 
-       {/* More Information */}
-       <div className="border rounded mx-auto w-9/12 shadow-md mt-2 sm:mb-4 hidden lg:block lg:mt-1 lg:mb-6">
+        {/* More Information */}
+        <div className="border rounded mx-auto sm:w-10/12 lg:w-9/12 shadow-md mt-2  hidden sm:block sm:mt-1 sm:mb-6">
           <button
             className="px-4 py-2 rounded shadow-md w-full flex justify-between"
             onClick={toggleDiv}
@@ -66,20 +79,18 @@ const BiddingHome = () => {
             </div>
           )}
         </div>
-      
       </div>
 
-     
+      <div className="sm:w-1/2 lg:5/12 sm:flex sm:flex-col sm:items-center">
+        {/* Top Bidders */}
 
-      <div className="lg:w-5/12 lg:flex lg:flex-col lg:items-center">
-      {/* Top Bidders */}
-      
-        <div className="w-9/12 mx-auto p-2 px-4 border-gray-200 border-2 bg-white rounded shadow-md sm:mb-4 lg:w-11/12">
-          <div className="flex justify-between items-center w-full mb-1 cursor-pointer" onClick={toggleTopBidders}>
+        <div className={`${isAnyOpen?"w-10/12":"w-9/12"}  mx-auto p-2 px-4 border-gray-200 border-2 bg-white rounded shadow-md  sm:w-11/12 lg:w-10/12`}>
+          <div
+            className="flex justify-between items-center w-full mb-1 cursor-pointer"
+            onClick={toggleTopBidders}
+          >
             <div className="font-semibold text-gray-500">Top Bidders</div>
-            <div
-              className="font-bold text-gray-500 cursor-pointer"
-            >
+            <div className="font-bold text-gray-500 cursor-pointer">
               {isTopBiddersOpen ? <span>-</span> : <span>+</span>}
             </div>
           </div>
@@ -168,12 +179,13 @@ const BiddingHome = () => {
         </div>
 
         {/* Bid Section */}
-        <div className="w-9/12 mx-auto p-2 px-4 border-gray-200 border-2 bg-white rounded shadow-md sm:mb-4 lg:w-11/12">
-          <div className="flex justify-between items-center w-full cursor-pointer" onClick={toggleBid}>
+        <div className={`${isAnyOpen?"w-10/12":"w-9/12"} w-9/12 mx-auto mt-2 p-2 px-4 border-gray-200 border-2 bg-white rounded shadow-md sm:mt-4 sm:w-11/12 lg:w-10/12`}>
+          <div
+            className="flex justify-between items-center w-full cursor-pointer"
+            onClick={toggleBid}
+          >
             <div className="font-semibold text-gray-500 ">Bid</div>
-            <div
-              className="font-bold text-gray-500 cursor-pointer"
-            >
+            <div className="font-bold text-gray-500 cursor-pointer">
               {isBidOpen ? <span>-</span> : <span>+</span>}
             </div>
           </div>
@@ -188,7 +200,7 @@ const BiddingHome = () => {
               </div>
               <div className="mt-4 mb-4">
                 Highest Bid :{" "}
-                <span className="border-2 p-1 px-8 border-gray-200 ml-4 rounded shadow-md">
+                <span className="border-2 p-1 px-4 border-gray-200 ml-4 rounded shadow-md">
                   Rs. 4,500/-
                 </span>{" "}
               </div>
@@ -231,7 +243,7 @@ const BiddingHome = () => {
         </div>
 
         {/* More Information */}
-        <div className="border rounded mx-auto w-9/12 shadow-md mt-2 sm:mb-4 lg:hidden">
+        <div className={`${isAnyOpen?"w-10/12":"w-9/12"} border rounded mx-auto w-9/12 shadow-md mt-2  sm:hidden`}>
           <button
             className="px-4 py-2 rounded shadow-md w-full flex justify-between"
             onClick={toggleDiv}
