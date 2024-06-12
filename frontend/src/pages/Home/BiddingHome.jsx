@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import painting from "../../assets/painting.jpg";
-import Image from "../../assets/WIN_20240517_10_43_20_Pro.jpg";
+import tree from "../../assets/tree.jpg";
 
 const BiddingHome = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,7 +40,7 @@ const BiddingHome = () => {
         className={`${isAnyOpen ? "flex flex-row ":" "} sm:flex-col sm:w-1/2 sm:items-center sm:mb-0 sm:justify-normal`}
       >
         {/* Image */}
-        <div className={`sm:w-10/12 lg:w-9/12 ${isAnyOpen?"w-[12rem] h-[12rem] mx-auto mr-0":"mx-auto"}  w-9/12  h-[25rem] sm:mx-auto mb-2 sm:w-8/12 sm:h-[22rem] sm:mb-2 `}>
+        <div className={`sm:w-10/12 lg:w-9/12 ${isAnyOpen?"w-[12rem] h-[11rem] mx-auto mr-0":"mx-auto"}  w-9/12  h-[25rem] sm:mx-auto mb-2 sm:w-10/12 sm:h-[22rem] sm:mb-2 `}>
           <img
             src={painting}
             alt="Oil Painting"
@@ -48,7 +48,7 @@ const BiddingHome = () => {
           />
         </div>
         {/* Description */}
-        <div className={`sm:w-10/12 lg:w-9/12 h-fit ${isAnyOpen?"w-[18rem] h-[12rem] mx-auto ml-2":"w-9/12 mx-auto "}  px-8 py-4  bg-white sm:mx-auto rounded-lg shadow-lg border-gray-200 border-2 mb-2 `}>
+        <div className={`sm:w-10/12 lg:w-9/12 h-fit ${isAnyOpen?"w-[18rem] h-[11rem] mx-auto ml-2":"w-9/12 mx-auto "}  px-8 py-4  bg-white sm:mx-auto rounded-lg shadow-lg border-gray-200 border-2 mb-2 `}>
           <h2 className="text-lg  font-bold">Oil Painting by Famous Artist</h2>
           <p className="=sm:mb-0">It's a picture of a person</p>
           <p className="font-semibold sm:mb-0">Auction ID - xxxxxx</p>
