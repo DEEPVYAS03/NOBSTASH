@@ -5,20 +5,20 @@ import { useNavigate } from 'react-router';
 
 const Home = () => {
   const [isRegistered, setIsRegistered] = useState(true);
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const bidButtonClick = () => {
-    navigate('/home-bidding')
-  }
+    navigate('/home-bidding');
+  };
+
   return (
     <div className='flex flex-col h-full'>
-      <div className="mt-4 mb-4 flex flex-row gap-4 border-2 w-10/12 lg:w-8/12 mx-auto p-4 rounded shadow-lg h-96">
+      <div className="mt-4 mb-4 flex flex-col sm:flex-row gap-4 border-2 w-11/12 lg:w-8/12 mx-auto p-4 rounded shadow-lg h-auto sm:h-96">
         {/* Left */}
-        <div className='w-5/12'>
+        <div className='w-full sm:w-5/12'>
           <img src={Painting} alt="Painting" className='w-full h-full object-fill rounded shadow-md' />
         </div>
         {/* Right */}
-        <div className='w-7/12 flex flex-col justify-between p-2'>
+        <div className='w-full sm:w-7/12 flex flex-col justify-between p-2'>
           <div>
             <p><span className='font-bold'>Oil Painting </span>by <span className='font-semibold'>Famous Artist</span></p>
             <p className='text-sm text-gray-600'>It's a picture of person</p>
@@ -30,24 +30,24 @@ const Home = () => {
             <p className=''>Rs 1,000/-</p>
           </div>
           {/* buttons */}
-          <div className='mt-4 flex gap-4'>
+          <div className='mt-4 flex flex-col sm:flex-row gap-4'>
             {
               isRegistered ?
-                <button className='w-1/2 px-4 py-2 rounded-lg bg-black text-white' onClick={bidButtonClick}>Bid</button> :
-                <button className='w-1/2 px-4 py-2 rounded-lg bg-black text-white'>Register to Bid</button>
+                <button className='w-full sm:w-1/2 px-4 py-2 rounded-lg bg-black text-white' onClick={bidButtonClick}>Bid</button> :
+                <button className='w-full sm:w-1/2 px-4 py-2 rounded-lg bg-black text-white'>Register to Bid</button>
             }
-            <button className='w-1/2 px-4 py-2 rounded-lg bg-white text-black border-black border-2'>View</button>
+            <button className='w-full sm:w-1/2 px-4 py-2 rounded-lg bg-white text-black border-black border-2'>View</button>
           </div>
         </div>
       </div>
 
-      <div className="mb-4 flex flex-row gap-4 border-2 w-10/12 lg:w-8/12 mx-auto p-4 rounded shadow-lg h-96">
+      <div className="mb-4 flex flex-col sm:flex-row gap-4 border-2 w-11/12 lg:w-8/12 mx-auto p-4 rounded shadow-lg h-auto sm:h-96">
         {/* Left */}
-        <div className='w-5/12'>
+        <div className='w-full sm:w-5/12'>
           <img src={Tree} alt="Tree" className='w-full h-full object-fill rounded shadow-md' />
         </div>
         {/* Right */}
-        <div className='w-7/12 flex flex-col justify-between p-2'>
+        <div className='w-full sm:w-7/12 flex flex-col justify-between p-2'>
           <div>
             <p><span className='font-bold'>Oil Painting </span>by <span className='font-semibold'>Famous Artist</span></p>
             <p className='text-sm text-gray-600'>It's a picture of person</p>
@@ -59,19 +59,18 @@ const Home = () => {
             <p className=''>Rs 1,000/-</p>
           </div>
           {/* buttons */}
-          <div className='mt-4 flex gap-4'>
+          <div className='mt-4 flex flex-col sm:flex-row gap-4'>
             {
               isRegistered ?
-                <button className='w-1/2 px-4 py-2 rounded-lg bg-black text-white' onClick={bidButtonClick}>Bid</button> :
-                <button className='w-1/2 px-4 py-2 rounded-lg bg-black text-white'>Register to Bid</button>
+                <button className='w-full sm:w-1/2 px-4 py-2 rounded-lg bg-black text-white' onClick={bidButtonClick}>Bid</button> :
+                <button className='w-full sm:w-1/2 px-4 py-2 rounded-lg bg-black text-white'>Register to Bid</button>
             }
-            <button className='w-1/2 px-4 py-2 rounded-lg bg-white text-black border-black border-2'>View</button>
+            <button className='w-full sm:w-1/2 px-4 py-2 rounded-lg bg-white text-black border-black border-2'>View</button>
           </div>
         </div>
       </div>
-      =
     </div>
   );
-}
+};
 
 export default Home;

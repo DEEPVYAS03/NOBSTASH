@@ -191,7 +191,7 @@ const Kyc = () => {
     error && <Modal message={error} onClose={() => setError("")} />;
 
   return (
-    <div className="p-4 px-8">
+    <div className="p-4">
       {/* Header */}
       <div className="border-b-2 border-black p-2 flex gap-8 items-center">
         <div className="font-bold text-xl">KYC</div>
@@ -206,10 +206,11 @@ const Kyc = () => {
         )}
       </div>
 
-      {/* KYC Type */}
-      <div className="mt-4 flex items-center">
+   
+     {/* KYC Type */}
+     <div className="mt-4 flex items-center">
         <div className="font-bold px-2">KYC Type: </div>
-        <div className="flex items-center ml-10 gap-12">
+        <div className="flex items-center justify-evenly w-5/12">
           <div>
             <input
               type="checkbox"
@@ -247,8 +248,9 @@ const Kyc = () => {
           <button
             onClick={handleSubmit}
             className={`px-4 py-[0.3rem] bg-black text-white font-semibold rounded ml-4 ${
-              isSubmitted ? "hidden" : ""
+              isSubmitted ? "cursor-not-allowed" : ""
             }`}
+            disabled={isSubmitted}
           >
             Submit
           </button>
@@ -259,11 +261,11 @@ const Kyc = () => {
 
       {isSubmitted && kycType === "Individual" && (
         <div className="flex flex-col w-full mt-8 gap-4">
-            
+
           {/* Aadhar Verification Section */}
           <div className="border rounded shadow-md w-full md:w-10/12">
             <button
-              className="px-4 py-2 rounded w-full flex justify-between items-center border-2"
+              className="px-2 py-2 rounded w-full flex justify-between items-center border-2"
               onClick={toggleAadhar}
             >
               <span className="text-gray-500 font-semibold">
@@ -336,7 +338,7 @@ const Kyc = () => {
           {/* PAN Verification Section */}
           <div className="border rounded shadow-md w-full md:w-10/12">
             <button
-              className="px-4 py-2 rounded w-full flex justify-between items-center border-2"
+              className="px-2 py-2 rounded w-full flex justify-between items-center border-2"
               onClick={togglePan}
             >
               <span className="text-gray-500 font-semibold">
@@ -415,7 +417,7 @@ const Kyc = () => {
           {/* Bank Verification Section */}
           <div className="border rounded shadow-md w-full md:w-10/12">
             <button
-              className="px-4 py-2 rounded w-full flex justify-between items-center border-2"
+              className="px-2 py-2 rounded w-full flex justify-between items-center border-2"
               onClick={toggleBank}
             >
               <span className="text-gray-500 font-semibold">
@@ -484,7 +486,7 @@ const Kyc = () => {
           {/* Incorportation Verification Section */}
           <div className="border rounded shadow-md w-full md:w-10/12">
             <button
-              className="px-4 py-2 rounded w-full flex justify-between items-center border-2"
+              className="px-2 py-2 rounded w-full flex justify-between items-center border-2"
               onClick={toggleIncorp}
             >
               <span className="text-gray-500 font-semibold">
@@ -531,7 +533,7 @@ const Kyc = () => {
           {/* GSTIN Verification Section */}
           <div className="border rounded shadow-md w-full md:w-10/12">
             <button
-              className="px-4 py-2 rounded w-full flex justify-between items-center border-2"
+              className="px-2 py-2 rounded w-full flex justify-between items-center border-2"
               onClick={toggleGstin}
             >
               <span className="text-gray-500 font-semibold">
@@ -580,7 +582,7 @@ const Kyc = () => {
           {/* PAN Verification Section */}
           <div className="border rounded shadow-md w-full md:w-10/12">
             <button
-              className="px-4 py-2 rounded w-full flex justify-between items-center border-2"
+              className="px-2 py-2 rounded w-full flex justify-between items-center border-2"
               onClick={togglePan}
             >
               <span className="text-gray-500 font-semibold">
@@ -659,7 +661,7 @@ const Kyc = () => {
           {/* Bank Verification Section */}
           <div className="border rounded shadow-md w-full md:w-10/12">
             <button
-              className="px-4 py-2 rounded w-full flex justify-between items-center border-2"
+              className="px-2 py-2 rounded w-full flex justify-between items-center border-2"
               onClick={toggleBank}
             >
               <span className="text-gray-500 font-semibold">

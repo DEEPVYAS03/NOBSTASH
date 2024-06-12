@@ -20,11 +20,11 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
   return (
     <div
-      className={`fixed sm:static z-10 bg-white p-6  shadow-lg border-r border-gray-200 flex flex-col  transform transition-transform duration-300 ${
+      className={`fixed sm:static z-10 bg-white p-6 shadow-lg border-r border-gray-200 flex flex-col justify-between h-full sm:h-full max-h-[94%] sm:max-h-full transform transition-transform duration-300 ${
         isOpen ? 'translate-x-0' : '-translate-x-full'
-      } sm:translate-x-0 sm:w-20 lg:w-60 h-full sm:h-screen`}
+      } sm:translate-x-0 sm:w-20 lg:w-60`}
     >
-      <div className="space-y-8">
+      <div className="flex flex-col space-y-8 flex-grow">
         <div
           className={`flex items-center cursor-pointer ${
             activeItem === 'home' ? 'font-bold' : 'hover:font-bold'
@@ -89,8 +89,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <span className="ml-3 hidden lg:inline">Support</span>
         </div>
       </div>
-
-      <div className="mt-52">
+      <div className="absolute bottom-0 left-0 w-full p-6 pb-10">
         <div
           className={`flex items-center cursor-pointer ${
             activeItem === 'logout' ? 'font-bold' : 'hover:font-bold'

@@ -14,11 +14,11 @@ const Settlements = () => {
 
   return (
     <div className="">
-      <div className="flex flex-col md:flex-row border rounded-lg overflow-hidden shadow-md w-full max-w-2xl font-sans m-4 p-4 bg-white">
+      <div className="flex flex-col md:flex-row border rounded-lg overflow-hidden shadow-md w-full max-w-2xl font-sans  p-4 bg-white">
         <img
           src={painting}
           alt="Oil Painting"
-          className="w-full md:w-60 h-60 md:h-auto object-fill border-2 rounded-lg cursor-pointer"
+          className="w-full sm:h-96 md:w-60 h-70 md:h-auto object-fill border-2 rounded-lg cursor-pointer"
           onClick={handleImageClick}
         />
         <div className="flex flex-col justify-between mt-4 md:mt-0 md:ml-4 flex-1">
