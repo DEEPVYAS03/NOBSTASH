@@ -218,7 +218,7 @@ const BiddingHome = () => {
               </div>
               <div className="mt-4 mb-4">
                 Highest Bid :{" "}
-                <span className="border-2 p-1 px-4 border-gray-200 ml-4 rounded shadow-md">
+                <span className="border-2 p-1 px-4 border-gray-200 ml-2 rounded shadow-md">
                   Rs. 4,500/-
                 </span>{" "}
               </div>
