@@ -3,9 +3,13 @@
 @tailwind utilities;
 
 .custom-checkbox {
-    @apply appearance-none w-4 h-4 border border-checkbox-border outline-none cursor-pointer;
-  }
-  
-  .custom-checkbox:checked {
-    @apply bg-checkbox-checked;
-  }
+  @apply appearance-none w-4 h-4 border border-gray-400 outline-none cursor-pointer;
+}
+
+.custom-checkbox:checked {
+  @apply bg-black;
+}
+
+.custom-checkbox:disabled {
+  @apply bg-gray-300 border-gray-300 cursor-not-allowed;
+}
