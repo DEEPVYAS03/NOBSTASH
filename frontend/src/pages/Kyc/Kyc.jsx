@@ -36,12 +36,7 @@ const Kyc = () => {
   const [incorpStatus, setIncorpStatus] = useState("INCOMPLETE");
   const [gstinStatus, setGstinStatus] = useState("INCOMPLETE");
 
-
-
-
   const [finalStatus, setFinalStatus] = useState("Not Verified");
-
-  
 
   // aadhar
   const [aadharNumber, setAadharNumber] = useState("");
@@ -64,17 +59,15 @@ const Kyc = () => {
   const [isBankDisabled, setIsBankDisabled] = useState(false);
   const [showBankSubmitButton, setShowBankSubmitButton] = useState(true);
 
+  // Incorporation
+  const [cin, setCin] = useState("");
+  const [isIncorpDisabled, setIsIncorpDisabled] = useState(false);
+  const [showIncorpSubmitButton, setShowIncorpSubmitButton] = useState(true);
 
-   // Incorporation
-   const [cin, setCin] = useState("");
-   const [isIncorpDisabled, setIsIncorpDisabled] = useState(false);
-   const [showIncorpSubmitButton, setShowIncorpSubmitButton] = useState(true);
- 
-   // GSTIN
-   const [gstin, setGstin] = useState("");
-   const [isGstinDisabled, setIsGstinDisabled] = useState(false);
-   const [showGstinSubmitButton, setShowGstinSubmitButton] = useState(true);
-
+  // GSTIN
+  const [gstin, setGstin] = useState("");
+  const [isGstinDisabled, setIsGstinDisabled] = useState(false);
+  const [showGstinSubmitButton, setShowGstinSubmitButton] = useState(true);
 
   // Error state
   const [error, setError] = useState("");
@@ -103,8 +96,7 @@ const Kyc = () => {
     setShowVerifyButton(false);
   };
 
-
-//   pan submit
+  //   pan submit
   const panSubmitClick = () => {
     if (!panNumber || !panName || !panDob) {
       setError("Please fill in all PAN details.");
@@ -120,7 +112,7 @@ const Kyc = () => {
     setShowPanSubmitButton(false);
   };
 
-//   bank submit
+  //   bank submit
   const bankSubmitClick = () => {
     if (!ifsc || !accountNumber) {
       setError("Please fill in all Bank details.");
@@ -166,14 +158,19 @@ const Kyc = () => {
   // finalStatus
   useEffect(() => {
     if (
-      (kycType === "Individual" && aadharStatus === "VERIFIED" && panStatus === "VERIFIED" && bankStatus === "VERIFIED") ||
-      (kycType === "Company" && ((incorpStatus === "VERIFIED" && panStatus === "VERIFIED" && gstinStatus === "VERIFIED" && bankStatus === "VERIFIED")))
+      (kycType === "Individual" &&
+        aadharStatus === "VERIFIED" &&
+        panStatus === "VERIFIED" &&
+        bankStatus === "VERIFIED") ||
+      (kycType === "Company" &&
+        incorpStatus === "VERIFIED" &&
+        panStatus === "VERIFIED" &&
+        gstinStatus === "VERIFIED" &&
+        bankStatus === "VERIFIED")
     ) {
       setFinalStatus("Completed");
     }
   }, [aadharStatus, panStatus, bankStatus, incorpStatus, gstinStatus, kycType]);
-
-
 
   // toggles
   const toggleAadhar = () => setIsAadharOpen(!isAadharOpen);
@@ -181,7 +178,6 @@ const Kyc = () => {
   const toggleBank = () => setIsBankOpen(!isBankOpen);
   const toggleIncorp = () => setIsIncorpOpen(!isIncorpOpen);
   const toggleGstin = () => setIsGstinOpen(!isGstinOpen);
-
 
   const handleCheckboxChange = (type) => {
     setKycType(type);
@@ -199,14 +195,15 @@ const Kyc = () => {
       {/* Header */}
       <div className="border-b-2 border-black p-2 flex gap-8 items-center">
         <div className="font-bold text-xl">KYC</div>
-        {
-            finalStatus === "Completed" ?<div className="border-2 px-2 border-black rounded text-black bg-white py-1">
+        {finalStatus === "Completed" ? (
+          <div className="border-2 px-2 border-black rounded text-black bg-white py-1">
             Completed
-          </div> :<div className="border-2 px-2 border-black rounded text-white bg-black py-1">
+          </div>
+        ) : (
+          <div className="border-2 px-2 border-black rounded text-white bg-black py-1">
             Not verified
           </div>
-        }
-        
+        )}
       </div>
 
       {/* KYC Type */}
@@ -262,6 +259,7 @@ const Kyc = () => {
 
       {isSubmitted && kycType === "Individual" && (
         <div className="flex flex-col w-full mt-8 gap-4">
+            
           {/* Aadhar Verification Section */}
           <div className="border rounded shadow-md w-full md:w-10/12">
             <button
@@ -298,17 +296,17 @@ const Kyc = () => {
                 {isOtp ? (
                   <div className="flex flex-col mb-4">
                     <div className="flex flex-row">
-                    <div className="w-full sm:w-3/12 font-semibold">OTP</div>
-                    <input
-                      type="number"
-                      placeholder="XXXX"
-                      value={otp}
-                      onChange={(e) => setOtp(e.target.value)}
-                      className={`border-2 rounded px-4 w-full sm:w-6/12 md:w-4/12 lg:w-3/12 ${
-                        isOtpDisabled ? "bg-gray-300" : ""
-                      }`}
-                      disabled={isOtpDisabled}
-                    />
+                      <div className="w-full sm:w-3/12 font-semibold">OTP</div>
+                      <input
+                        type="number"
+                        placeholder="XXXX"
+                        value={otp}
+                        onChange={(e) => setOtp(e.target.value)}
+                        className={`border-2 rounded px-4 w-full sm:w-6/12 md:w-4/12 lg:w-3/12 ${
+                          isOtpDisabled ? "bg-gray-300" : ""
+                        }`}
+                        disabled={isOtpDisabled}
+                      />
                     </div>
                     {showVerifyButton && (
                       <div className="mt-4">
@@ -469,7 +467,251 @@ const Kyc = () => {
                       className="text-white rounded font-semibold border-2 border-black bg-black px-4 py-1"
                       onClick={bankSubmitClick}
                     >
-                      Submit 
+                      Submit
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {isSubmitted && kycType === "Company" && (
+        <div className="flex flex-col w-full mt-8 gap-4">
+
+
+          {/* Incorportation Verification Section */}
+          <div className="border rounded shadow-md w-full md:w-10/12">
+            <button
+              className="px-4 py-2 rounded w-full flex justify-between items-center border-2"
+              onClick={toggleIncorp}
+            >
+              <span className="text-gray-500 font-semibold">
+                Incorporation Verification
+              </span>
+              <span className="text-gray-500">[{incorpStatus}]</span>
+              <span className="text-gray-500 font-bold">
+                {isIncorpOpen ? "-" : "+"}
+              </span>
+            </button>
+
+            {isIncorpOpen && (
+              <div className="border-t-2 border-black p-4">
+                <div className="flex flex-row mb-4">
+                  <div className="font-semibold w-full sm:w-3/12">
+                    CIN
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="XXXXXXXXXX"
+                    value={cin}
+                    onChange={(e) => setCin(e.target.value)}
+                    className={`border-2 rounded px-4 w-full sm:w-6/12 md:w-4/12 lg:w-3/12 ${
+                      isIncorpDisabled ? "bg-gray-300" : ""
+                    }`}
+                    disabled={isIncorpDisabled}
+                  />
+                </div>
+
+                {showIncorpSubmitButton && (
+                  <div className="mt-4">
+                    <button
+                      className="text-white rounded font-semibold border-2 border-black bg-black px-4 py-1"
+                      onClick={incorpSubmitClick}
+                    >
+                      Submit
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* GSTIN Verification Section */}
+          <div className="border rounded shadow-md w-full md:w-10/12">
+            <button
+              className="px-4 py-2 rounded w-full flex justify-between items-center border-2"
+              onClick={toggleGstin}
+            >
+              <span className="text-gray-500 font-semibold">
+                GSTIN Verification
+              </span>
+              <span className="text-gray-500">[{gstinStatus}]</span>
+              <span className="text-gray-500 font-bold">
+                {isGstinOpen ? "-" : "+"}
+              </span>
+            </button>
+
+            {isGstinOpen && (
+              <div className="border-t-2 border-black p-4">
+                <div className="flex flex-row mb-4">
+                  <div className="font-semibold w-full sm:w-3/12">
+                    GSTIN
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="XXXXXXXXXX"
+                    value={gstin}
+                    onChange={(e) => setGstin(e.target.value)}
+                    className={`border-2 rounded px-4 w-full sm:w-6/12 md:w-4/12 lg:w-3/12 ${
+                      isGstinDisabled ? "bg-gray-300" : ""
+                    }`}
+                    disabled={isGstinDisabled}
+                  />
+                </div>
+
+                
+
+                {showGstinSubmitButton && (
+                  <div className="mt-4">
+                    <button
+                      className="text-white rounded font-semibold border-2 border-black bg-black px-4 py-1"
+                      onClick={gstinSubmitClick}
+                    >
+                      Submit
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* PAN Verification Section */}
+          <div className="border rounded shadow-md w-full md:w-10/12">
+            <button
+              className="px-4 py-2 rounded w-full flex justify-between items-center border-2"
+              onClick={togglePan}
+            >
+              <span className="text-gray-500 font-semibold">
+                PAN Verification
+              </span>
+              <span className="text-gray-500">[{panStatus}]</span>
+              <span className="text-gray-500 font-bold">
+                {isPanOpen ? "-" : "+"}
+              </span>
+            </button>
+
+            {isPanOpen && (
+              <div className="border-t-2 border-black p-4">
+                <div className="flex flex-row mb-4">
+                  <div className="font-semibold w-full sm:w-3/12">
+                    PAN Number
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="XXXXXXXXXX"
+                    value={panNumber}
+                    onChange={(e) => setPanNumber(e.target.value)}
+                    className={`border-2 rounded px-4 w-full sm:w-6/12 md:w-4/12 lg:w-3/12 ${
+                      isPanDisabled ? "bg-gray-300" : ""
+                    }`}
+                    disabled={isPanDisabled}
+                  />
+                </div>
+
+                <div className="flex flex-row mb-4">
+                  <div className="font-semibold w-full sm:w-3/12">
+                    Name on PAN
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    value={panName}
+                    onChange={(e) => setPanName(e.target.value)}
+                    className={`border-2 rounded px-4 w-full sm:w-6/12 md:w-4/12 lg:w-3/12 ${
+                      isPanDisabled ? "bg-gray-300" : ""
+                    }`}
+                    disabled={isPanDisabled}
+                  />
+                </div>
+
+                <div className="flex flex-row mb-4">
+                  <div className="font-semibold w-full sm:w-3/12">
+                    Date of Birth
+                  </div>
+                  <input
+                    type="date"
+                    placeholder="DOB"
+                    value={panDob}
+                    onChange={(e) => setPanDob(e.target.value)}
+                    className={`border-2 rounded px-4 w-full sm:w-6/12 md:w-4/12 lg:w-3/12 ${
+                      isPanDisabled ? "bg-gray-300" : ""
+                    }`}
+                    disabled={isPanDisabled}
+                  />
+                </div>
+
+                {showPanSubmitButton && (
+                  <div className="mt-4">
+                    <button
+                      className="text-white rounded font-semibold border-2 border-black bg-black px-4 py-1"
+                      onClick={panSubmitClick}
+                    >
+                      Submit
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Bank Verification Section */}
+          <div className="border rounded shadow-md w-full md:w-10/12">
+            <button
+              className="px-4 py-2 rounded w-full flex justify-between items-center border-2"
+              onClick={toggleBank}
+            >
+              <span className="text-gray-500 font-semibold">
+                Bank Verification
+              </span>
+              <span className="text-gray-500">[{bankStatus}]</span>
+              <span className="text-gray-500 font-bold">
+                {isBankOpen ? "-" : "+"}
+              </span>
+            </button>
+
+            {isBankOpen && (
+              <div className="border-t-2 border-black p-4">
+                <div className="flex flex-row mb-4">
+                  <div className="font-semibold w-full sm:w-3/12">
+                    IFSC Code
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="IFSC"
+                    value={ifsc}
+                    onChange={(e) => setIfsc(e.target.value)}
+                    className={`border-2 rounded px-4 w-full sm:w-6/12 md:w-4/12 lg:w-3/12 ${
+                      isBankDisabled ? "bg-gray-300" : ""
+                    }`}
+                    disabled={isBankDisabled}
+                  />
+                </div>
+
+                <div className="flex flex-row mb-4">
+                  <div className="font-semibold w-full sm:w-3/12">
+                    Account Number
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="XXXXXXXXXXXX"
+                    value={accountNumber}
+                    onChange={(e) => setAccountNumber(e.target.value)}
+                    className={`border-2 rounded px-4 w-full sm:w-6/12 md:w-4/12 lg:w-3/12 ${
+                      isBankDisabled ? "bg-gray-300" : ""
+                    }`}
+                    disabled={isBankDisabled}
+                  />
+                </div>
+
+                {showBankSubmitButton && (
+                  <div className="mt-4">
+                    <button
+                      className="text-white rounded font-semibold border-2 border-black bg-black px-4 py-1"
+                      onClick={bankSubmitClick}
+                    >
+                      Submit
                     </button>
                   </div>
                 )}
