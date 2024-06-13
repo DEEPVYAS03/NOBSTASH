@@ -1,10 +1,10 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import useAuth from "../../redux/dispatch/useAuth";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import useAuth from '../../redux/dispatch/useAuth';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -13,20 +13,26 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
-} from "@/components/ui/input-otp";
+} from '@/components/ui/input-otp';
 
-import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
+
+const passwordRegExp = new RegExp('^[a-zA-Z0-9!@#$%^&*()_+]{6,50}$');
 
 const resetPasswordFormSchema = z.object({
   otp: z.string().min(6).max(6),
-  newPassword: z.string().min(2).max(50),
+  newPassword: z
+    .string()
+    .min(2)
+    .max(50)
+    .regex(passwordRegExp, 'Select a strong password'),
   confirmNewPassword: z.string().min(2).max(50),
 });
 
@@ -40,28 +46,28 @@ const ResetPassword = () => {
   const resetPasswordForm = useForm({
     resolver: zodResolver(resetPasswordFormSchema),
     defaultValues: {
-      otp: "",
-      newPassword: "",
-      confirmNewPassword: "",
+      otp: '',
+      newPassword: '',
+      confirmNewPassword: '',
     },
   });
 
   async function onSubmit(values) {
     if (values.newPassword !== values.confirmNewPassword) {
-      return resetPasswordForm.setError("confirmNewPassword", {
-        type: "manual",
-        message: "Passwords do not match",
+      return resetPasswordForm.setError('confirmNewPassword', {
+        type: 'manual',
+        message: 'Passwords do not match',
       });
     } else {
-      const email = queryParams.get("email");
+      const email = queryParams.get('email');
 
       const isSuccess = await resetPassword(
         email,
         values.newPassword,
-        values.otp,
+        values.otp
       );
       if (isSuccess) {
-        nav("/login");
+        nav('/login');
       }
     }
   }
@@ -94,7 +100,10 @@ const ResetPassword = () => {
               <FormItem>
                 <FormLabel>Enter the One-Time Password</FormLabel>
                 <FormControl>
-                  <InputOTP maxLength={6} {...field}>
+                  <InputOTP
+                    maxLength={6}
+                    {...field}
+                  >
                     <InputOTPGroup>
                       <InputOTPSlot index={0} />
                       <InputOTPSlot index={1} />
@@ -121,7 +130,10 @@ const ResetPassword = () => {
                 <FormItem>
                   <FormLabel>New Password</FormLabel>
                   <FormControl>
-                    <Input placeholder="new password" {...field} />
+                    <Input
+                      placeholder="new password"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -146,32 +158,41 @@ const ResetPassword = () => {
               )}
             />
           </div>
-          <Button type="submit" className="w-full">
+          <Button
+            type="submit"
+            className="w-full"
+          >
             Reset Password
           </Button>
         </form>
       </Form>
 
       <p className="mt-5 cursor-pointer text-center text-sm text-gray-600">
-        Not have an account?{" "}
+        Not have an account?{' '}
         <Button
           variant="link"
           className="px-0 font-semibold underline"
-          onClick={() => nav("/signup")}
+          onClick={() => nav('/signup')}
         >
           Signup
-        </Button>{" "}
+        </Button>{' '}
         here
       </p>
 
       <p className="mt-5 text-center text-xs text-gray-500">
-        By clicking continue, you agree to our{" "}
-        <Button variant="link" className="p-0 text-xs">
-          {" "}
+        By clicking continue, you agree to our{' '}
+        <Button
+          variant="link"
+          className="p-0 text-xs"
+        >
+          {' '}
           Terms of Service
-        </Button>{" "}
-        and{" "}
-        <Button variant="link" className="p-0 text-xs">
+        </Button>{' '}
+        and{' '}
+        <Button
+          variant="link"
+          className="p-0 text-xs"
+        >
           Privacy Policy
         </Button>
       </p>

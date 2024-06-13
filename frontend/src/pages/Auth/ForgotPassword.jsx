@@ -84,6 +84,7 @@ const Login = () => {
           <Button
             type="submit"
             className="w-full"
+            disabled={!isCaptchaVerifed}
           >
             Send Mail
             {/* {OTP} */}

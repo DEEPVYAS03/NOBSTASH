@@ -19,14 +19,26 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 
+const phoneRegExp = new RegExp('^[0-9]{10}$');
+const usernameRegExp = new RegExp('^[a-z0-9_]{3,50}$');
+const passwordRegExp = new RegExp('^[a-zA-Z0-9!@#$%^&*()_+]{6,50}$');
+
 const signupFormSchema = z.object({
-  username: z.string().min(3).max(50),
+  username: z
+    .string()
+    .min(3)
+    .max(50)
+    .regex(
+      usernameRegExp,
+      'Username can only contain lowercase letters, numbers, and underscores.'
+    ),
   email: z.string().email('Please enter a valid email address'),
   phone: z
     .string()
     .min(10, 'Phone number must be 10 digits')
-    .max(10, 'Phone number must be 10 digits'),
-  password: z.string().min(2).max(50),
+    .max(10, 'Phone number must be 10 digits')
+    .regex(phoneRegExp, 'Phone number must be 10 digits'),
+  password: z.string().min(2).max(50).regex(passwordRegExp, 'Select a strong password'),
   confirmPassword: z.string().min(2).max(50),
 });
 

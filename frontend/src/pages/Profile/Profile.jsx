@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
 import {
   Form,
@@ -7,17 +7,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { Button } from '@/components/ui/button';
 
-import useAuth from "@/redux/dispatch/useAuth";
-import { toast } from "sonner";
-import axiosInstance from "@/api/axois";
+import useAuth from '@/redux/dispatch/useAuth';
+import { toast } from 'sonner';
+import axiosInstance from '@/api/axois';
 
 const profileFormSchema = z.object({
   name: z.string().min(3).max(50).optional(),
@@ -33,28 +33,28 @@ function Profile() {
   const profileForm = useForm({
     resolver: zodResolver(profileFormSchema),
     defaultValues: {
-      name: "",
-      username: "",
-      email: "",
-      mobile: "",
-      address: "",
-      pincode: "",
+      name: '',
+      username: '',
+      email: '',
+      mobile: '',
+      address: '',
+      pincode: '',
     },
   });
 
   useEffect(() => {
     if (auth.user) {
-      profileForm.setValue("name", auth.user.name);
-      profileForm.setValue("username", auth.user.userName);
-      profileForm.setValue("email", auth.user.email);
-      profileForm.setValue("mobile", auth.user.phone);
-      profileForm.setValue("address", auth.user.address);
-      profileForm.setValue("pincode", auth.user.pincode);
+      profileForm.setValue('name', auth.user.name);
+      profileForm.setValue('username', auth.user.userName);
+      profileForm.setValue('email', auth.user.email);
+      profileForm.setValue('mobile', auth.user.phone);
+      profileForm.setValue('address', auth.user.address);
+      profileForm.setValue('pincode', auth.user.pincode);
     }
   }, []);
 
   async function onSubmit(values) {
-    const result = await axiosInstance.put("user/update-detail", {
+    const result = await axiosInstance.put('user/update-detail', {
       name: values.name,
       userName: values.username,
       email: values.email,
@@ -64,27 +64,25 @@ function Profile() {
     });
 
     if (result.status === 200) {
-      console.log("User updated successfully");
-      toast.success("User updated successfully");
+      console.log('User updated successfully');
+      toast.success('User updated successfully');
       setAuth(
         {
           ...auth.user,
           ...result.data.user,
         },
-        auth.token,
+        auth.token
       );
     } else {
-      console.log("User not updated");
-      toast.error("User not updated");
+      console.log('User not updated');
+      toast.error('User not updated');
     }
   }
 
   return (
     <>
-
       <div className="flex h-screen w-full">
-        <div className="h-full">
-        </div>
+        <div className="h-full"></div>
         <div className="flex w-full flex-col items-center">
           <h2 className="text-2xl font-bold">Profile</h2>
 
@@ -100,7 +98,10 @@ function Profile() {
                   <FormItem>
                     <FormLabel>Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="name" {...field} />
+                      <Input
+                        placeholder="name"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -108,13 +109,16 @@ function Profile() {
               />
               <FormField
                 control={profileForm.control}
-
                 name="username"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Username</FormLabel>
                     <FormControl>
-                      <Input disabled placeholder="username" {...field} />
+                      <Input
+                        disabled
+                        placeholder="username"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -127,7 +131,10 @@ function Profile() {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="email" {...field} />
+                      <Input
+                        placeholder="email"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -140,7 +147,11 @@ function Profile() {
                   <FormItem>
                     <FormLabel>Mobile</FormLabel>
                     <FormControl>
-                      <Input disabled placeholder="mobile" {...field} />
+                      <Input
+                        disabled
+                        placeholder="mobile"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -153,7 +164,10 @@ function Profile() {
                   <FormItem>
                     <FormLabel>Address</FormLabel>
                     <FormControl>
-                      <Input placeholder="address" {...field} />
+                      <Input
+                        placeholder="address"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -166,13 +180,16 @@ function Profile() {
                   <FormItem>
                     <FormLabel>Pincode</FormLabel>
                     <FormControl>
-                      <Input placeholder="pincode" {...field} />
+                      <Input
+                        placeholder="pincode"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button>Save Details</Button>
+              <Button variant="outline">Save Details</Button>
             </form>
           </Form>
         </div>
