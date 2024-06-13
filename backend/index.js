@@ -11,8 +11,8 @@ connectDB();
 
 // importing routes
 const faqRoutes = require('./routes/faqRoutes');
-
-
+const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 // middlewares
 app.use(cors())
@@ -44,6 +44,8 @@ app.get('/',(req,res)=>{
 
 // using routes
 app.use('/api/faqs', faqRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/user', userRoutes);
 
 
 // listening to server

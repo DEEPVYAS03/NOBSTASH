@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IoHomeOutline, IoHome, IoShieldCheckmarkOutline, IoShieldCheckmark, IoWalletOutline, IoWallet, IoLogOutOutline, IoLogOut } from "react-icons/io5";
+import {
+  IoHomeOutline,
+  IoHome,
+  IoShieldCheckmarkOutline,
+  IoShieldCheckmark,
+  IoWalletOutline,
+  IoWallet,
+  IoLogOutOutline,
+  IoLogOut,
+} from 'react-icons/io5';
 import profileImage from '../assets/profile.png';
-import { FcFaq } from "react-icons/fc";
-import { MdOutlinePhoneInTalk, MdPhoneInTalk } from "react-icons/md";
-import { RiAuctionFill, RiAuctionLine } from "react-icons/ri";
+import { FcFaq } from 'react-icons/fc';
+import { MdOutlinePhoneInTalk, MdPhoneInTalk } from 'react-icons/md';
+import { RiAuctionFill, RiAuctionLine } from 'react-icons/ri';
+import useAuth from '@/redux/dispatch/useAuth';
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   const [activeItem, setActiveItem] = useState('');
   const navigate = useNavigate();
+  const { logoutUser } = useAuth();
 
   const handleItemClick = (item, path) => {
     setActiveItem(item);
@@ -94,7 +105,11 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           className={`flex items-center cursor-pointer ${
             activeItem === 'logout' ? 'font-bold' : 'hover:font-bold'
           }`}
-          onClick={() => handleItemClick('logout', '/logout')}
+          onClick={() => {
+            setActiveItem('logout');
+            logoutUser();
+            navigate('/');
+          }}
         >
           {activeItem === 'logout' ? <IoLogOut className="text-2xl" /> : <IoLogOutOutline className="text-2xl" />}
           <span className="ml-3 hidden lg:inline">Logout</span>

@@ -3,12 +3,16 @@ import Painting from '../../assets/painting.jpg';
 import Tree from '../../assets/tree.jpg';
 import { useNavigate } from 'react-router';
 
+import useAuth from '@/redux/dispatch/useAuth';
+
 const Home = () => {
+  const { auth } = useAuth();
   const [isRegistered, setIsRegistered] = useState(true);
   const navigate = useNavigate();
   const bidButtonClick = () => {
     navigate('/home-bidding');
   };
+  console.log('Home',auth);
 
   return (
     <div className='flex flex-col h-full'>
