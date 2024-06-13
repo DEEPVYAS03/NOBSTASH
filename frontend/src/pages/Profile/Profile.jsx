@@ -16,7 +16,6 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 
 import useAuth from "@/redux/dispatch/useAuth";
-import axios from "axios";
 import { toast } from "sonner";
 import axiosInstance from "@/api/axois";
 
@@ -109,12 +108,13 @@ function Profile() {
               />
               <FormField
                 control={profileForm.control}
+
                 name="username"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Username</FormLabel>
                     <FormControl>
-                      <Input placeholder="username" {...field} />
+                      <Input disabled placeholder="username" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -140,7 +140,7 @@ function Profile() {
                   <FormItem>
                     <FormLabel>Mobile</FormLabel>
                     <FormControl>
-                      <Input placeholder="mobile" {...field} />
+                      <Input disabled placeholder="mobile" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

@@ -108,7 +108,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           onClick={() => {
             setActiveItem('logout');
             logoutUser();
-            navigate('/');
+            navigate('/login');
           }}
         >
           {activeItem === 'logout' ? <IoLogOut className="text-2xl" /> : <IoLogOutOutline className="text-2xl" />}

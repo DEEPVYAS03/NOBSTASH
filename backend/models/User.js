@@ -4,8 +4,6 @@ const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
-      default: "N/A",
     },
     userName: {
       type: String,
@@ -22,26 +20,15 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
     phone: {
-      type: Number,
-      min: 10000000,
-      default: 9876543210,
+      type: String,
       required: true,
+      unique: true,
     },
     address: {
       type: String,
-      default: "N/A",
-      required: true,
     },
     pincode: {
       type: String,
-      default: "N/A",
-      required: true,
-    },
-
-    amount: {
-      type: Number,
-      default: 6000,
-      required: true,
     },
     isVerified: {
       type: Boolean,
@@ -50,7 +37,6 @@ const userSchema = new mongoose.Schema(
     },
     otp: {
       type: String,
-      default: null,
     },
   },
   { timestamps: true }

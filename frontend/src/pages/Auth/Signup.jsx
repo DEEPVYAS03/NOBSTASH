@@ -1,12 +1,12 @@
 // @ts-ignore
 
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import useAuth from "../../redux/dispatch/useAuth";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import useAuth from '../../redux/dispatch/useAuth';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { Button } from '@/components/ui/button';
 
 import {
   Form,
@@ -15,12 +15,16 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 
 const signupFormSchema = z.object({
   username: z.string().min(3).max(50),
-  email: z.string().email(),
+  email: z.string().email('Please enter a valid email address'),
+  phone: z
+    .string()
+    .min(10, 'Phone number must be 10 digits')
+    .max(10, 'Phone number must be 10 digits'),
   password: z.string().min(2).max(50),
   confirmPassword: z.string().min(2).max(50),
 });
@@ -33,27 +37,29 @@ const SignupForm = () => {
   const signupForm = useForm({
     resolver: zodResolver(signupFormSchema),
     defaultValues: {
-      username: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
+      username: '',
+      email: '',
+      phone: '',
+      password: '',
+      confirmPassword: '',
     },
   });
 
   async function onSubmit(values) {
     if (values.password !== values.confirmPassword) {
-      return signupForm.setError("confirmPassword", {
-        type: "manual",
-        message: "Passwords do not match",
+      return signupForm.setError('confirmPassword', {
+        type: 'manual',
+        message: 'Passwords do not match',
       });
     } else {
-      const isSuccessed = signup(
+      const isSuccessed = await signup(
         values.username,
         values.email,
-        values.password,
+        values.phone,
+        values.password
       );
       if (isSuccessed) {
-        nav("/");
+        nav('/');
       }
     }
   }
@@ -87,7 +93,10 @@ const SignupForm = () => {
               <FormItem>
                 <FormLabel>Username</FormLabel>
                 <FormControl>
-                  <Input placeholder="username" {...field} />
+                  <Input
+                    placeholder="username"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -100,7 +109,27 @@ const SignupForm = () => {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="email" {...field} />
+                  <Input
+                    placeholder="email"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={signupForm.control}
+            name="phone"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Phone</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="phone number"
+                    type="tel"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -114,7 +143,11 @@ const SignupForm = () => {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="password" {...field} type="password" />
+                  <Input
+                    placeholder="password"
+                    {...field}
+                    type="password"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -138,32 +171,41 @@ const SignupForm = () => {
               </FormItem>
             )}
           />
-          <Button type="submit" className="w-full">
+          <Button
+            type="submit"
+            className="w-full"
+          >
             Sign Up with Email
           </Button>
-        </form>{" "}
+        </form>{' '}
       </Form>
 
       <p className="mt-5 cursor-pointer text-center text-sm text-gray-600">
-        Already have an account?{" "}
+        Already have an account?{' '}
         <Button
           variant="link"
           className="px-0 font-semibold underline"
-          onClick={() => nav("/login")}
+          onClick={() => nav('/login')}
         >
           Login
-        </Button>{" "}
+        </Button>{' '}
         here
       </p>
 
       <p className="mt-5 text-center text-xs text-gray-500">
-        By clicking continue, you agree to our{" "}
-        <Button variant="link" className="p-0 text-xs">
-          {" "}
+        By clicking continue, you agree to our{' '}
+        <Button
+          variant="link"
+          className="p-0 text-xs"
+        >
+          {' '}
           Terms of Service
-        </Button>{" "}
-        and{" "}
-        <Button variant="link" className="p-0 text-xs">
+        </Button>{' '}
+        and{' '}
+        <Button
+          variant="link"
+          className="p-0 text-xs"
+        >
           Privacy Policy
         </Button>
       </p>

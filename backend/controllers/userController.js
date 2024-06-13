@@ -1,4 +1,3 @@
-const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 const dotenv = require('dotenv');
@@ -8,15 +7,12 @@ dotenv.config({ path: '.env.local' });
 exports.updateUserData = async (req, res) => {
   try {
     const id = req.body.userID;
-    const { userName, name, email, phone, address, pincode } = req.body;
+    const { name, address, pincode } = req.body;
 
     const user = await User.findByIdAndUpdate(
       id,
       {
-        userName,
         name,
-        email,
-        phone,
         address,
         pincode,
       },

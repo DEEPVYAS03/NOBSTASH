@@ -1,18 +1,17 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
 import {
   loginFailure,
   loginStart,
   loginSuccess,
   logout,
-} from "../features/userSlice";
-import axios from "axios";
-import { useCookies } from "react-cookie";
-
-import { toast } from "sonner";
+} from '../features/userSlice';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
+import { toast } from 'sonner';
 
 const useAuth = () => {
   const auth = useSelector((state) => state.auth);
-  const [cookies, setCookie, removeCookie] = useCookies(["auth_token"]);
+  const [cookies, setCookie, removeCookie] = useCookies(['auth_token']);
 
   const dispatch = useDispatch();
 
@@ -20,20 +19,23 @@ const useAuth = () => {
     dispatch(loginSuccess({ user, token }));
   };
 
-  const signup = async (userName, email, password) => {
+  const signup = async (userName, email, phone, password) => {
     dispatch(loginStart());
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/signup", {
+      const res = await axios.post('http://localhost:5000/api/auth/signup', {
         username: userName,
         email,
-        password: password,
+        password,
+        phone,
       });
-      setCookie("auth_token", res.data.token, {
-        path: "/",
+
+      setCookie('auth_token', res.data.token, {
+        path: '/',
         expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
       });
+
       dispatch(loginSuccess({ user: res.data.user, token: res.data.token }));
-      toast.success("Account created successfully");
+      toast.success('Account created successfully');
       return true;
     } catch (err) {
       dispatch(loginFailure());
@@ -46,23 +48,22 @@ const useAuth = () => {
   const login = async (email, password) => {
     dispatch(loginStart());
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
+      const res = await axios.post('http://localhost:5000/api/auth/login', {
         email: email,
         password: password,
       });
 
-      setCookie("auth_token", res.data.token, {
-        path: "/",
+      setCookie('auth_token', res.data.token, {
+        path: '/',
         expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
       });
       dispatch(loginSuccess({ user: res.data.user, token: res.data.token }));
-      toast.success("Login Successful");
+      toast.success('Login Successful');
 
       return true;
     } catch (err) {
       toast.error(err.response.data);
       dispatch(loginFailure());
-
       return false;
     }
   };
@@ -76,17 +77,17 @@ const useAuth = () => {
       }
 
       const res = await axios.post(
-        "http://localhost:5000/api/auth/token",
+        'http://localhost:5000/api/auth/token',
         {},
         {
           headers: {
             Authorization: `Bearer ${cookies.auth_token}`,
           },
-        },
+        }
       );
 
-      setCookie("auth_token", res.data.token, {
-        path: "/",
+      setCookie('auth_token', res.data.token, {
+        path: '/',
         expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
       });
 
@@ -100,10 +101,10 @@ const useAuth = () => {
   const forgotPassword = async (email) => {
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/forgot-password",
+        'http://localhost:5000/api/auth/forgot-password',
         {
           email,
-        },
+        }
       );
       toast.success(res.data);
       return true;
@@ -116,12 +117,12 @@ const useAuth = () => {
   const resetPassword = async (email, newPassword, otp) => {
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/reset-password",
+        'http://localhost:5000/api/auth/reset-password',
         {
           email,
           newPassword,
           otp,
-        },
+        }
       );
       toast.success(res.data);
       return true;
@@ -132,9 +133,9 @@ const useAuth = () => {
   };
 
   const logoutUser = () => {
-    removeCookie("auth_token", { path: "/" });
+    removeCookie('auth_token', { path: '/' });
     dispatch(logout());
-    toast.success("Logged out successfully");
+    toast.success('Logged out successfully');
   };
 
   return {

@@ -22,18 +22,29 @@ const transporter = nodemailer.createTransport({
 
 exports.signup = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, phone, email, password } = req.body;
 
-    if (!username || !email || !password) {
+    if (!username || !email || !password || !phone) {
       return res.status(400).send('All fields are required');
     }
 
     const user = await User.findOne({
-      $or: [{ userName: username }, { email: email }],
+      $or: [{ userName: username }, { email: email }, { phone: phone }],
     });
 
+    console.log(user);
+
     if (user) {
-      return res.status(400).send('User already exists');
+      if (user.userName === username) {
+        return res.status(400).send('Username already exists');
+      }
+      if (user.email === email) {
+        return res.status(400).send('Email already exists');
+      }
+
+      if (user.phone === phone) {
+        return res.status(400).send('Phone number already exists');
+      }
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -43,8 +54,8 @@ exports.signup = async (req, res) => {
       userName: username,
       email: email,
       password: hash,
+      phone: phone,
     });
-
     await newUser.save();
 
     const token = jwt.sign(
@@ -88,17 +99,19 @@ exports.signup = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
-
     const user = await User.findOne({ email: email });
 
     if (!user) {
       return res.status(404).send('User Not Found');
     }
 
-    const isCorrect = await bcrypt.compare(password.toString(), user.password);
+    if (!user.isVerified) {
+      return res.status(401).send('User not verified');
+    }
 
-    if (!isCorrect || !user.isVerified) {
-      return res.status(401).send('Incorrect Password or User not verified');
+    const isCorrect = await bcrypt.compare(password.toString(), user.password);
+    if (!isCorrect) {
+      return res.status(400).send('Invalid Credentials');
     }
 
     const token = jwt.sign(

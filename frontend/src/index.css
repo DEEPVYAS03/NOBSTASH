@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+.jost {
+  font-family: 'Jost', sans-serif;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,7 +19,6 @@
 .custom-checkbox:disabled {
   @apply bg-gray-300 border-gray-300 cursor-not-allowed;
 }
-
 
 @layer base {
   :root {
@@ -85,10 +90,12 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border jost;
   }
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
   }
 }
