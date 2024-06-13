@@ -13,6 +13,7 @@ connectDB();
 const faqRoutes = require('./routes/faqRoutes');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
+const paymentRoutes = require('./routes/paymentRoutes');
 
 // middlewares
 app.use(cors())
@@ -46,6 +47,7 @@ app.get('/',(req,res)=>{
 app.use('/api/faqs', faqRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/payment', paymentRoutes);
 
 
 // listening to server
