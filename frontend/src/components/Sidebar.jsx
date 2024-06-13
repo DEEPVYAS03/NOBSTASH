@@ -9,23 +9,29 @@ import {
   IoWallet,
   IoLogOutOutline,
   IoLogOut,
+  IoLogInOutline,
 } from 'react-icons/io5';
 import profileImage from '../assets/profile.png';
 import { FcFaq } from 'react-icons/fc';
 import { MdOutlinePhoneInTalk, MdPhoneInTalk } from 'react-icons/md';
 import { RiAuctionFill, RiAuctionLine } from 'react-icons/ri';
 import useAuth from '@/redux/dispatch/useAuth';
+import { Toaster, toast } from 'react-hot-toast';
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
-  const [activeItem, setActiveItem] = useState('');
+  const [activeItem, setActiveItem] = useState('home');
   const navigate = useNavigate();
-  const { logoutUser } = useAuth();
+  const { logoutUser, auth } = useAuth();
 
   const handleItemClick = (item, path) => {
-    setActiveItem(item);
-    navigate(path);
-    if (window.innerWidth < 640) {
-      toggleSidebar(); // Close sidebar on item click for small screens
+    if (!auth.user && ['profile', 'kyc', 'trading', 'center', 'faq', 'support'].includes(item)) {
+      toast.error('You need to login first');
+    } else {
+      setActiveItem(item);
+      navigate(path);
+      if (window.innerWidth < 640) {
+        toggleSidebar(); // Close sidebar on item click for small screens
+      }
     }
   };
 
@@ -40,7 +46,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           className={`flex items-center cursor-pointer ${
             activeItem === 'home' ? 'font-bold' : 'hover:font-bold'
           }`}
-          onClick={() => handleItemClick('home', '/home')}
+          onClick={() => handleItemClick('home', '/')}
         >
           {activeItem === 'home' ? <IoHome className="text-2xl" /> : <IoHomeOutline className="text-2xl" />}
           <span className="ml-3 hidden lg:inline">Home</span>
@@ -101,20 +107,36 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         </div>
       </div>
       <div className="absolute bottom-0 left-0 w-full p-6 pb-10">
-        <div
-          className={`flex items-center cursor-pointer ${
-            activeItem === 'logout' ? 'font-bold' : 'hover:font-bold'
-          }`}
-          onClick={() => {
-            setActiveItem('logout');
-            logoutUser();
-            navigate('/login');
-          }}
-        >
-          {activeItem === 'logout' ? <IoLogOut className="text-2xl" /> : <IoLogOutOutline className="text-2xl" />}
-          <span className="ml-3 hidden lg:inline">Logout</span>
-        </div>
+        {auth.user ? (
+          <div
+            className={`flex items-center cursor-pointer ${
+              activeItem === 'logout' ? 'font-bold' : 'hover:font-bold'
+            }`}
+            onClick={() => {
+              setActiveItem('logout');
+              logoutUser();
+              navigate('/login');
+            }}
+          >
+            {activeItem === 'logout' ? <IoLogOut className="text-2xl" /> : <IoLogOutOutline className="text-2xl" />}
+            <span className="ml-3 hidden lg:inline">Logout</span>
+          </div>
+        ) : (
+          <div
+            className={`flex items-center cursor-pointer ${
+              activeItem === 'login' ? 'font-bold' : 'hover:font-bold'
+            }`}
+            onClick={() => {
+              setActiveItem('login');
+              navigate('/login');
+            }}
+          >
+            <IoLogInOutline className="text-2xl" />
+            <span className="ml-3 hidden lg:inline">Login</span>
+          </div>
+        )}
       </div>
+      <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
 };
