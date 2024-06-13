@@ -4,7 +4,7 @@ import React from "react";
 const Modal = ({ message, onClose }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white rounded-lg shadow-lg p-6 w-1/3">
+      <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
         <div className="text-lg font-semibold mb-4">Error</div>
         <div className="mb-4">{message}</div>
         <button
@@ -17,6 +17,7 @@ const Modal = ({ message, onClose }) => {
     </div>
   );
 };
+
 
 const Kyc = () => {
   const [kycType, setKycType] = useState("Individual");
@@ -318,7 +319,7 @@ const Kyc = () => {
 
       {kycType === "Individual" && (
         <div className="flex flex-col w-full mt-8 gap-4">
-          
+
           {/* Aadhar Verification Section */}
           <div className="border rounded shadow-md w-full md:w-10/12">
             <button
