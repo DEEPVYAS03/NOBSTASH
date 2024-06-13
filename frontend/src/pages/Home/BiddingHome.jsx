@@ -39,10 +39,10 @@ const BiddingHome = () => {
         {/* Image */}
         <div
           className={`sm:w-10/12 lg:w-9/12 ${
-            isAnyOpen ? "w-[12rem] h-[12rem] mx-auto mr-0" : "mx-auto"
+            isAnyOpen ? "w-[8rem] h-[11rem] mx-auto mr-0" : "mx-auto"
           } w-9/12 ${
-            isAnyOpen ? "h-48" : "h-[25rem]"
-          } sm:h-[22rem] sm:mb-2 sm:mx-auto`}
+            isAnyOpen ? "h-32" : "h-[20rem]"
+          } sm:h-1/2 sm:mb-2 sm:mx-auto`}
         >
           <img
             src={painting}
@@ -54,12 +54,12 @@ const BiddingHome = () => {
         {/* Description */}
         <div
           className={`sm:w-10/12 lg:w-9/12 h-fit ${
-            isAnyOpen ? "w-[18rem] h-[12rem] mx-auto ml-2" : "w-9/12 mx-auto"
+            isAnyOpen ? "w-[14rem] h-[11rem] mx-auto ml-2" : "w-9/12 mx-auto"
           } ${
-            isAnyOpen ? "h-48" : "h-auto"
-          } px-8 py-4 bg-white sm:mx-auto rounded-lg shadow-lg border-gray-200 border-2 mb-2`}
+            isAnyOpen ? "h-32" : "h-auto"
+          } px-4 py-2 bg-white sm:mx-auto rounded-lg shadow-lg border-gray-200 border-2 mb-2`}
         >
-          <h2 className="text-lg  font-bold">Oil Painting by Famous Artist</h2>
+          <h2 className="text-lg font-bold">Oil Painting by Famous Artist</h2>
           <p className="=sm:mb-0">It's a picture of a person</p>
           <p className="font-semibold sm:mb-0">Auction ID - xxxxxx</p>
           <p className="font-bold">Available Quantity: 3</p>
@@ -96,7 +96,7 @@ const BiddingHome = () => {
 
         <div
           className={`${
-            isAnyOpen ? "w-[30rem]" : "w-9/12"
+            isAnyOpen ? "w-[22rem]" : "w-9/12"
           } mx-auto p-2 px-4 border-gray-200 border-2 bg-white rounded shadow-md sm:w-11/12 lg:w-10/12`}
         >
           <div
@@ -185,7 +185,7 @@ const BiddingHome = () => {
               </div>
 
               {/* Ad Banner */}
-              <div className="w-full h-40 mt-2 mb-2 p-4 rounded shadow-md border-2 border-gray-200">
+              <div className="w-full h-32 mt-2 mb-2 p-4 rounded shadow-md border-2 border-gray-200">
                 <p>Ad Banner</p>
               </div>
             </div>
@@ -195,7 +195,7 @@ const BiddingHome = () => {
         {/* Bid Section */}
         <div
           className={`${
-            isAnyOpen ? "w-[30rem]" : "w-9/12"
+            isAnyOpen ? "w-[22rem]" : "w-9/12"
           } mx-auto mt-2 p-2 px-4 border-gray-200 border-2 bg-white rounded shadow-md sm:mt-4 sm:w-11/12 lg:w-10/12`}
         >
           <div
@@ -231,7 +231,7 @@ const BiddingHome = () => {
                   00 Hrs 15 Min 45 Sec
                 </span>
               </div>
-              <div className="mt-4 w-fit border-2 px-3 py-1 rounded-lg  text-sm text-gray-500 font-semibold">
+              <div className="mt-4 w-fit border-2 px-3 py-1 rounded-lg text-sm text-gray-500 font-semibold">
                 Next Bid should be greater than{" "}
                 <span className="font-bold"> Rs.3,300/-</span>
               </div>
@@ -252,7 +252,7 @@ const BiddingHome = () => {
                   Account Balance:{" "}
                   <span className="font-semibold">Rs. 20,000/-</span>{" "}
                 </p>
-                <button className="w-fit mt-3 mb-2  border-2 border-black  px-2 py-2 rounded-lg">
+                <button className="w-fit mt-3 mb-2 border-2 border-black px-2 py-2 rounded-lg">
                   Add Funds
                 </button>
               </div>
@@ -263,7 +263,7 @@ const BiddingHome = () => {
         {/* More Information */}
         <div
           className={`${
-            isAnyOpen ? "w-[30rem]" : "w-9/12"
+            isAnyOpen ? "w-[22rem]" : "w-9/12"
           } border rounded mx-auto shadow-md mt-2 sm:hidden`}
         >
           <button
