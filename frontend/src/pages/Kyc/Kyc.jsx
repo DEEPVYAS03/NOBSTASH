@@ -24,15 +24,19 @@ const Kyc = () => {
 
   // expandable
   const [isAadharOpen, setIsAadharOpen] = useState(false);
-  const [isPanOpen, setIsPanOpen] = useState(false);
-  const [isBankOpen, setIsBankOpen] = useState(false);
+  const [isIPanOpen, setIsIPanOpen] = useState(false);
+  const [isIBankOpen, setIsIBankOpen] = useState(false);
+  const [isCPanOpen, setIsCPanOpen] = useState(false);
+  const [isCBankOpen, setIsCBankOpen] = useState(false);
   const [isIncorpOpen, setIsIncorpOpen] = useState(false);
   const [isGstinOpen, setIsGstinOpen] = useState(false);
 
   // status
   const [aadharStatus, setAadharStatus] = useState("INCOMPLETE");
-  const [panStatus, setPanStatus] = useState("INCOMPLETE");
-  const [bankStatus, setBankStatus] = useState("INCOMPLETE");
+  const [iPanStatus, setIPanStatus] = useState("INCOMPLETE");
+  const [iBankStatus, setIBankStatus] = useState("INCOMPLETE");
+  const [cPanStatus, setCPanStatus] = useState("INCOMPLETE");
+  const [cBankStatus, setCBankStatus] = useState("INCOMPLETE");
   const [incorpStatus, setIncorpStatus] = useState("INCOMPLETE");
   const [gstinStatus, setGstinStatus] = useState("INCOMPLETE");
 
@@ -46,18 +50,31 @@ const Kyc = () => {
   const [isOtpDisabled, setIsOtpDisabled] = useState(false);
   const [showVerifyButton, setShowVerifyButton] = useState(true);
 
-  // pan
-  const [panNumber, setPanNumber] = useState("");
-  const [panName, setPanName] = useState("");
-  const [panDob, setPanDob] = useState("");
-  const [isPanDisabled, setIsPanDisabled] = useState(false);
-  const [showPanSubmitButton, setShowPanSubmitButton] = useState(true);
+  //individual pan
+  const [iPanNumber, setIPanNumber] = useState("");
+  const [iPanName, setIPanName] = useState("");
+  const [iPanDob, setIPanDob] = useState("");
+  const [isIPanDisabled, setIsIPanDisabled] = useState(false);
+  const [showIPanSubmitButton, setShowIPanSubmitButton] = useState(true);
 
-  // bank
-  const [ifsc, setIfsc] = useState("");
-  const [accountNumber, setAccountNumber] = useState("");
-  const [isBankDisabled, setIsBankDisabled] = useState(false);
-  const [showBankSubmitButton, setShowBankSubmitButton] = useState(true);
+  //company pan
+  const [cPanNumber, setCPanNumber] = useState("");
+  const [cPanName, setCPanName] = useState("");
+  const [cPanDob, setCPanDob] = useState("");
+  const [isCPanDisabled, setIsCPanDisabled] = useState(false);
+  const [showCPanSubmitButton, setShowCPanSubmitButton] = useState(true);
+
+  // individual bank
+  const [iIfsc, setIIfsc] = useState("");
+  const [iAccountNumber, setIAccountNumber] = useState("");
+  const [isIBankDisabled, setIsIBankDisabled] = useState(false);
+  const [showIBankSubmitButton, setShowIBankSubmitButton] = useState(true);
+
+  // company bank
+  const [cIfsc, setCIfsc] = useState("");
+  const [cAccountNumber, setCAccountNumber] = useState("");
+  const [isCBankDisabled, setIsCBankDisabled] = useState(false);
+  const [showCBankSubmitButton, setShowCBankSubmitButton] = useState(true);
 
   // Incorporation
   const [cin, setCin] = useState("");
@@ -80,7 +97,7 @@ const Kyc = () => {
     setError("");
     setIsOtp(true);
     setIsAadharDisabled(true);
-    setAadharNumber("");
+    // setAadharNumber("");
   };
 
   const verifyOtpClick = () => {
@@ -91,40 +108,70 @@ const Kyc = () => {
     setError("");
     setIsOtpDisabled(true);
     setAadharStatus("UNDER REVIEW");
-    setOtp("");
+    // setOtp("");
     setIsAadharOpen(false);
     setShowVerifyButton(false);
   };
 
-  //   pan submit
-  const panSubmitClick = () => {
-    if (!panNumber || !panName || !panDob) {
+  // individual  pan submit
+  const iPanSubmitClick = () => {
+    if (!iPanNumber || !iPanName || !iPanDob) {
       setError("Please fill in all PAN details.");
       return;
     }
     setError("");
-    setIsPanDisabled(true);
-    setPanStatus("UNDER REVIEW");
-    setPanNumber("");
-    setPanName("");
-    setPanDob("");
-    setIsPanOpen(false);
-    setShowPanSubmitButton(false);
+    setIsIPanDisabled(true);
+    setIPanStatus("UNDER REVIEW");
+    // setIPanNumber("");
+    // setIPanName("");
+    // setIPanDob("");
+    setIsIPanOpen(false);
+    setShowIPanSubmitButton(false);
+  };
+  // company  pan submit
+  const cPanSubmitClick = () => {
+    if (!cPanNumber || !cPanName || !cPanDob) {
+      setError("Please fill in all PAN details.");
+      return;
+    }
+    setError("");
+    setIsCPanDisabled(true);
+    setCPanStatus("UNDER REVIEW");
+    // setCPanNumber("");
+    // setCPanName("");
+    // setCPanDob("");
+    setIsCPanOpen(false);
+    setShowCPanSubmitButton(false);
   };
 
-  //   bank submit
-  const bankSubmitClick = () => {
-    if (!ifsc || !accountNumber) {
+  //  individual bank submit
+  const iBankSubmitClick = () => {
+    if (!iIfsc || !iAccountNumber) {
       setError("Please fill in all Bank details.");
       return;
     }
     setError("");
-    setIsBankDisabled(true);
-    setBankStatus("UNDER REVIEW");
-    setIfsc("");
-    setAccountNumber("");
-    setIsBankOpen(false);
-    setShowBankSubmitButton(false);
+    setIsIBankDisabled(true);
+    setIBankStatus("UNDER REVIEW");
+    // setIIfsc("");
+    // setIAccountNumber("");
+    setIsIBankOpen(false);
+    setShowIBankSubmitButton(false);
+  };
+
+  //   bank submit
+  const cBankSubmitClick = () => {
+    if (!cIfsc || !cAccountNumber) {
+      setError("Please fill in all Bank details.");
+      return;
+    }
+    setError("");
+    setIsCBankDisabled(true);
+    setCBankStatus("UNDER REVIEW");
+    // setCIfsc("");
+    // setCAccountNumber("");
+    setIsCBankOpen(false);
+    setShowCBankSubmitButton(false);
   };
 
   // Incorporation submit
@@ -136,7 +183,7 @@ const Kyc = () => {
     setError("");
     setIsIncorpDisabled(true);
     setIncorpStatus("UNDER REVIEW");
-    setCin("");
+    // setCin("");
     setIsIncorpOpen(false);
     setShowIncorpSubmitButton(false);
   };
@@ -150,7 +197,7 @@ const Kyc = () => {
     setError("");
     setIsGstinDisabled(true);
     setGstinStatus("UNDER REVIEW");
-    setGstin("");
+    // setGstin("");
     setIsGstinOpen(false);
     setShowGstinSubmitButton(false);
   };
@@ -160,22 +207,33 @@ const Kyc = () => {
     if (
       (kycType === "Individual" &&
         aadharStatus === "VERIFIED" &&
-        panStatus === "VERIFIED" &&
-        bankStatus === "VERIFIED") ||
+        iPanStatus === "VERIFIED" &&
+        iBankStatus === "VERIFIED") ||
       (kycType === "Company" &&
         incorpStatus === "VERIFIED" &&
-        panStatus === "VERIFIED" &&
+        cPanStatus === "VERIFIED" &&
         gstinStatus === "VERIFIED" &&
-        bankStatus === "VERIFIED")
+        cBankStatus === "VERIFIED")
     ) {
       setFinalStatus("Completed");
     }
-  }, [aadharStatus, panStatus, bankStatus, incorpStatus, gstinStatus, kycType]);
+  }, [
+    aadharStatus,
+    iPanStatus,
+    iBankStatus,
+    cPanStatus,
+    cBankStatus,
+    incorpStatus,
+    gstinStatus,
+    kycType,
+  ]);
 
   // toggles
   const toggleAadhar = () => setIsAadharOpen(!isAadharOpen);
-  const togglePan = () => setIsPanOpen(!isPanOpen);
-  const toggleBank = () => setIsBankOpen(!isBankOpen);
+  const toggleiPan = () => setIsIPanOpen(!isIPanOpen);
+  const toggleiBank = () => setIsIBankOpen(!isIBankOpen);
+  const togglecPan = () => setIsCPanOpen(!isCPanOpen);
+  const togglecBank = () => setIsCBankOpen(!isCBankOpen);
   const toggleIncorp = () => setIsIncorpOpen(!isIncorpOpen);
   const toggleGstin = () => setIsGstinOpen(!isGstinOpen);
 
@@ -206,9 +264,8 @@ const Kyc = () => {
         )}
       </div>
 
-   
-     {/* KYC Type */}
-     <div className="mt-4 flex items-center">
+      {/* KYC Type */}
+      <div className="mt-4 flex items-center">
         <div className="font-bold px-2">KYC Type: </div>
         <div className="flex items-center justify-evenly w-5/12">
           <div>
@@ -259,14 +316,16 @@ const Kyc = () => {
 
       {renderError()}
 
-      {isSubmitted && kycType === "Individual" && (
+      {kycType === "Individual" && (
         <div className="flex flex-col w-full mt-8 gap-4">
-
+          
           {/* Aadhar Verification Section */}
           <div className="border rounded shadow-md w-full md:w-10/12">
             <button
-              className="px-2 py-2 rounded w-full flex justify-between items-center border-2"
-              onClick={toggleAadhar}
+              className={`px-2 py-2 rounded w-full flex justify-between items-center border-2 ${
+                isSubmitted ? "cursor-pointer" : "cursor-not-allowed"
+              }`}
+              onClick={isSubmitted ? toggleAadhar : undefined}
             >
               <span className="text-gray-500 font-semibold">
                 Aadhar Verification
@@ -285,7 +344,9 @@ const Kyc = () => {
                   </div>
                   <input
                     type="number"
-                    placeholder="XXXXXXXXXXXX"
+                    placeholder={
+                      isAadharDisabled ? aadharNumber : "XXXXXXXXXXXX"
+                    }
                     value={aadharNumber}
                     onChange={(e) => setAadharNumber(e.target.value)}
                     className={`border-2 rounded px-4 w-full sm:w-6/12 md:w-4/12 lg:w-3/12 ${
@@ -302,7 +363,7 @@ const Kyc = () => {
                       <input
                         type="number"
                         placeholder="XXXX"
-                        value={otp}
+                        value={isOtpDisabled ? "" : otp}
                         onChange={(e) => setOtp(e.target.value)}
                         className={`border-2 rounded px-4 w-full sm:w-6/12 md:w-4/12 lg:w-3/12 ${
                           isOtpDisabled ? "bg-gray-300" : ""
@@ -338,19 +399,21 @@ const Kyc = () => {
           {/* PAN Verification Section */}
           <div className="border rounded shadow-md w-full md:w-10/12">
             <button
-              className="px-2 py-2 rounded w-full flex justify-between items-center border-2"
-              onClick={togglePan}
+              className={`px-2 py-2 rounded w-full flex justify-between items-center border-2 ${
+                isSubmitted ? "cursor-pointer" : "cursor-not-allowed"
+              }`}
+              onClick={isSubmitted ? toggleiPan : undefined}
             >
               <span className="text-gray-500 font-semibold">
                 PAN Verification
               </span>
-              <span className="text-gray-500">[{panStatus}]</span>
+              <span className="text-gray-500">[{iPanStatus}]</span>
               <span className="text-gray-500 font-bold">
-                {isPanOpen ? "-" : "+"}
+                {isIPanOpen ? "-" : "+"}
               </span>
             </button>
 
-            {isPanOpen && (
+            {isIPanOpen && (
               <div className="border-t-2 border-black p-4">
                 <div className="flex flex-row mb-4">
                   <div className="font-semibold w-full sm:w-3/12">
@@ -358,13 +421,13 @@ const Kyc = () => {
                   </div>
                   <input
                     type="text"
-                    placeholder="XXXXXXXXXX"
-                    value={panNumber}
-                    onChange={(e) => setPanNumber(e.target.value)}
+                    placeholder={isIPanDisabled ? iPanNumber : "XXXXXXXXXX"}
+                    value={iPanNumber}
+                    onChange={(e) => setIPanNumber(e.target.value)}
                     className={`border-2 rounded px-4 w-full sm:w-6/12 md:w-4/12 lg:w-3/12 ${
-                      isPanDisabled ? "bg-gray-300" : ""
+                      isIPanDisabled ? "bg-gray-300" : ""
                     }`}
-                    disabled={isPanDisabled}
+                    disabled={isIPanDisabled}
                   />
                 </div>
 
@@ -374,13 +437,15 @@ const Kyc = () => {
                   </div>
                   <input
                     type="text"
-                    placeholder="Name"
-                    value={panName}
-                    onChange={(e) => setPanName(e.target.value)}
+                    placeholder={
+                      isIPanDisabled ? iPanNumber : "Name as per PAN"
+                    }
+                    value={iPanName}
+                    onChange={(e) => setIPanName(e.target.value)}
                     className={`border-2 rounded px-4 w-full sm:w-6/12 md:w-4/12 lg:w-3/12 ${
-                      isPanDisabled ? "bg-gray-300" : ""
+                      isIPanDisabled ? "bg-gray-300" : ""
                     }`}
-                    disabled={isPanDisabled}
+                    disabled={isIPanDisabled}
                   />
                 </div>
 
@@ -390,21 +455,21 @@ const Kyc = () => {
                   </div>
                   <input
                     type="date"
-                    placeholder="DOB"
-                    value={panDob}
-                    onChange={(e) => setPanDob(e.target.value)}
+                    placeholder={isIPanDisabled ? iPanDob : "DOB"}
+                    value={iPanDob}
+                    onChange={(e) => setIPanDob(e.target.value)}
                     className={`border-2 rounded px-4 w-full sm:w-6/12 md:w-4/12 lg:w-3/12 ${
-                      isPanDisabled ? "bg-gray-300" : ""
+                      isIPanDisabled ? "bg-gray-300" : ""
                     }`}
-                    disabled={isPanDisabled}
+                    disabled={isIPanDisabled}
                   />
                 </div>
 
-                {showPanSubmitButton && (
+                {showIPanSubmitButton && (
                   <div className="mt-4">
                     <button
                       className="text-white rounded font-semibold border-2 border-black bg-black px-4 py-1"
-                      onClick={panSubmitClick}
+                      onClick={iPanSubmitClick}
                     >
                       Submit
                     </button>
@@ -417,19 +482,21 @@ const Kyc = () => {
           {/* Bank Verification Section */}
           <div className="border rounded shadow-md w-full md:w-10/12">
             <button
-              className="px-2 py-2 rounded w-full flex justify-between items-center border-2"
-              onClick={toggleBank}
+              className={`px-2 py-2 rounded w-full flex justify-between items-center border-2 ${
+                isSubmitted ? "cursor-pointer" : "cursor-not-allowed"
+              }`}
+              onClick={isSubmitted ? toggleiBank : undefined}
             >
               <span className="text-gray-500 font-semibold">
                 Bank Verification
               </span>
-              <span className="text-gray-500">[{bankStatus}]</span>
+              <span className="text-gray-500">[{iBankStatus}]</span>
               <span className="text-gray-500 font-bold">
-                {isBankOpen ? "-" : "+"}
+                {isIBankOpen ? "-" : "+"}
               </span>
             </button>
 
-            {isBankOpen && (
+            {isIBankOpen && (
               <div className="border-t-2 border-black p-4">
                 <div className="flex flex-row mb-4">
                   <div className="font-semibold w-full sm:w-3/12">
@@ -437,13 +504,13 @@ const Kyc = () => {
                   </div>
                   <input
                     type="text"
-                    placeholder="IFSC"
-                    value={ifsc}
-                    onChange={(e) => setIfsc(e.target.value)}
+                    placeholder={isIBankDisabled ? iIfsc : "IFSC"}
+                    value={iIfsc}
+                    onChange={(e) => setIIfsc(e.target.value)}
                     className={`border-2 rounded px-4 w-full sm:w-6/12 md:w-4/12 lg:w-3/12 ${
-                      isBankDisabled ? "bg-gray-300" : ""
+                      isIBankDisabled ? "bg-gray-300" : ""
                     }`}
-                    disabled={isBankDisabled}
+                    disabled={isIBankDisabled}
                   />
                 </div>
 
@@ -453,21 +520,23 @@ const Kyc = () => {
                   </div>
                   <input
                     type="text"
-                    placeholder="XXXXXXXXXXXX"
-                    value={accountNumber}
-                    onChange={(e) => setAccountNumber(e.target.value)}
+                    placeholder={
+                      isIBankDisabled ? iAccountNumber : "XXXXXXXXXXXX"
+                    }
+                    value={iAccountNumber}
+                    onChange={(e) => setIAccountNumber(e.target.value)}
                     className={`border-2 rounded px-4 w-full sm:w-6/12 md:w-4/12 lg:w-3/12 ${
-                      isBankDisabled ? "bg-gray-300" : ""
+                      isIBankDisabled ? "bg-gray-300" : ""
                     }`}
-                    disabled={isBankDisabled}
+                    disabled={isIBankDisabled}
                   />
                 </div>
 
-                {showBankSubmitButton && (
+                {showIBankSubmitButton && (
                   <div className="mt-4">
                     <button
                       className="text-white rounded font-semibold border-2 border-black bg-black px-4 py-1"
-                      onClick={bankSubmitClick}
+                      onClick={iBankSubmitClick}
                     >
                       Submit
                     </button>
@@ -479,15 +548,15 @@ const Kyc = () => {
         </div>
       )}
 
-      {isSubmitted && kycType === "Company" && (
+      {kycType === "Company" && (
         <div className="flex flex-col w-full mt-8 gap-4">
-
-
           {/* Incorportation Verification Section */}
           <div className="border rounded shadow-md w-full md:w-10/12">
             <button
-              className="px-2 py-2 rounded w-full flex justify-between items-center border-2"
-              onClick={toggleIncorp}
+              className={`px-2 py-2 rounded w-full flex justify-between items-center border-2 ${
+                isSubmitted ? "cursor-pointer" : "cursor-not-allowed"
+              }`}
+              onClick={isSubmitted ? toggleIncorp : undefined}
             >
               <span className="text-gray-500 font-semibold">
                 Incorporation Verification
@@ -501,12 +570,10 @@ const Kyc = () => {
             {isIncorpOpen && (
               <div className="border-t-2 border-black p-4">
                 <div className="flex flex-row mb-4">
-                  <div className="font-semibold w-full sm:w-3/12">
-                    CIN
-                  </div>
+                  <div className="font-semibold w-full sm:w-3/12">CIN</div>
                   <input
                     type="text"
-                    placeholder="XXXXXXXXXX"
+                    placeholder={isIncorpDisabled ? cin : "XXXXXXXXXX"}
                     value={cin}
                     onChange={(e) => setCin(e.target.value)}
                     className={`border-2 rounded px-4 w-full sm:w-6/12 md:w-4/12 lg:w-3/12 ${
@@ -533,8 +600,10 @@ const Kyc = () => {
           {/* GSTIN Verification Section */}
           <div className="border rounded shadow-md w-full md:w-10/12">
             <button
-              className="px-2 py-2 rounded w-full flex justify-between items-center border-2"
-              onClick={toggleGstin}
+              className={`px-2 py-2 rounded w-full flex justify-between items-center border-2 ${
+                isSubmitted ? "cursor-pointer" : "cursor-not-allowed"
+              }`}
+              onClick={isSubmitted ? toggleGstin : undefined}
             >
               <span className="text-gray-500 font-semibold">
                 GSTIN Verification
@@ -548,12 +617,10 @@ const Kyc = () => {
             {isGstinOpen && (
               <div className="border-t-2 border-black p-4">
                 <div className="flex flex-row mb-4">
-                  <div className="font-semibold w-full sm:w-3/12">
-                    GSTIN
-                  </div>
+                  <div className="font-semibold w-full sm:w-3/12">GSTIN</div>
                   <input
                     type="text"
-                    placeholder="XXXXXXXXXX"
+                    placeholder={isGstinDisabled ? gstin : "XXXXXXXXXX"}
                     value={gstin}
                     onChange={(e) => setGstin(e.target.value)}
                     className={`border-2 rounded px-4 w-full sm:w-6/12 md:w-4/12 lg:w-3/12 ${
@@ -562,8 +629,6 @@ const Kyc = () => {
                     disabled={isGstinDisabled}
                   />
                 </div>
-
-                
 
                 {showGstinSubmitButton && (
                   <div className="mt-4">
@@ -582,19 +647,21 @@ const Kyc = () => {
           {/* PAN Verification Section */}
           <div className="border rounded shadow-md w-full md:w-10/12">
             <button
-              className="px-2 py-2 rounded w-full flex justify-between items-center border-2"
-              onClick={togglePan}
+              className={`px-2 py-2 rounded w-full flex justify-between items-center border-2 ${
+                isSubmitted ? "cursor-pointer" : "cursor-not-allowed"
+              }`}
+              onClick={isSubmitted ? togglecPan : undefined}
             >
               <span className="text-gray-500 font-semibold">
                 PAN Verification
               </span>
-              <span className="text-gray-500">[{panStatus}]</span>
+              <span className="text-gray-500">[{cPanStatus}]</span>
               <span className="text-gray-500 font-bold">
-                {isPanOpen ? "-" : "+"}
+                {isCPanOpen ? "-" : "+"}
               </span>
             </button>
 
-            {isPanOpen && (
+            {isCPanOpen && (
               <div className="border-t-2 border-black p-4">
                 <div className="flex flex-row mb-4">
                   <div className="font-semibold w-full sm:w-3/12">
@@ -602,13 +669,13 @@ const Kyc = () => {
                   </div>
                   <input
                     type="text"
-                    placeholder="XXXXXXXXXX"
-                    value={panNumber}
-                    onChange={(e) => setPanNumber(e.target.value)}
+                    placeholder={isCPanDisabled ? cPanNumber : "XXXXXXXXXX"}
+                    value={cPanNumber}
+                    onChange={(e) => setCPanNumber(e.target.value)}
                     className={`border-2 rounded px-4 w-full sm:w-6/12 md:w-4/12 lg:w-3/12 ${
-                      isPanDisabled ? "bg-gray-300" : ""
+                      isCPanDisabled ? "bg-gray-300" : ""
                     }`}
-                    disabled={isPanDisabled}
+                    disabled={isCPanDisabled}
                   />
                 </div>
 
@@ -618,13 +685,13 @@ const Kyc = () => {
                   </div>
                   <input
                     type="text"
-                    placeholder="Name"
-                    value={panName}
-                    onChange={(e) => setPanName(e.target.value)}
+                    placeholder={isCPanDisabled ? cPanName : "Name as per PAN"}
+                    value={cPanName}
+                    onChange={(e) => setCPanName(e.target.value)}
                     className={`border-2 rounded px-4 w-full sm:w-6/12 md:w-4/12 lg:w-3/12 ${
-                      isPanDisabled ? "bg-gray-300" : ""
+                      isCPanDisabled ? "bg-gray-300" : ""
                     }`}
-                    disabled={isPanDisabled}
+                    disabled={isCPanDisabled}
                   />
                 </div>
 
@@ -634,21 +701,21 @@ const Kyc = () => {
                   </div>
                   <input
                     type="date"
-                    placeholder="DOB"
-                    value={panDob}
-                    onChange={(e) => setPanDob(e.target.value)}
+                    placeholder={isCPanDisabled ? cPanDob : "DOB"}
+                    value={cPanDob}
+                    onChange={(e) => setCPanDob(e.target.value)}
                     className={`border-2 rounded px-4 w-full sm:w-6/12 md:w-4/12 lg:w-3/12 ${
-                      isPanDisabled ? "bg-gray-300" : ""
+                      isCPanDisabled ? "bg-gray-300" : ""
                     }`}
-                    disabled={isPanDisabled}
+                    disabled={isCPanDisabled}
                   />
                 </div>
 
-                {showPanSubmitButton && (
+                {showCPanSubmitButton && (
                   <div className="mt-4">
                     <button
                       className="text-white rounded font-semibold border-2 border-black bg-black px-4 py-1"
-                      onClick={panSubmitClick}
+                      onClick={cPanSubmitClick}
                     >
                       Submit
                     </button>
@@ -661,19 +728,21 @@ const Kyc = () => {
           {/* Bank Verification Section */}
           <div className="border rounded shadow-md w-full md:w-10/12">
             <button
-              className="px-2 py-2 rounded w-full flex justify-between items-center border-2"
-              onClick={toggleBank}
+              className={`px-2 py-2 rounded w-full flex justify-between items-center border-2 ${
+                isSubmitted ? "cursor-pointer" : "cursor-not-allowed"
+              }`}
+              onClick={isSubmitted ? togglecBank : undefined}
             >
               <span className="text-gray-500 font-semibold">
                 Bank Verification
               </span>
-              <span className="text-gray-500">[{bankStatus}]</span>
+              <span className="text-gray-500">[{cBankStatus}]</span>
               <span className="text-gray-500 font-bold">
-                {isBankOpen ? "-" : "+"}
+                {isCBankOpen ? "-" : "+"}
               </span>
             </button>
 
-            {isBankOpen && (
+            {isCBankOpen && (
               <div className="border-t-2 border-black p-4">
                 <div className="flex flex-row mb-4">
                   <div className="font-semibold w-full sm:w-3/12">
@@ -681,13 +750,13 @@ const Kyc = () => {
                   </div>
                   <input
                     type="text"
-                    placeholder="IFSC"
-                    value={ifsc}
-                    onChange={(e) => setIfsc(e.target.value)}
+                    placeholder={isCBankDisabled ? cIfsc : "IFSC"}
+                    value={cIfsc}
+                    onChange={(e) => setCIfsc(e.target.value)}
                     className={`border-2 rounded px-4 w-full sm:w-6/12 md:w-4/12 lg:w-3/12 ${
-                      isBankDisabled ? "bg-gray-300" : ""
+                      isCBankDisabled ? "bg-gray-300" : ""
                     }`}
-                    disabled={isBankDisabled}
+                    disabled={isCBankDisabled}
                   />
                 </div>
 
@@ -697,21 +766,23 @@ const Kyc = () => {
                   </div>
                   <input
                     type="text"
-                    placeholder="XXXXXXXXXXXX"
-                    value={accountNumber}
-                    onChange={(e) => setAccountNumber(e.target.value)}
+                    placeholder={
+                      isCBankDisabled ? cAccountNumber : "XXXXXXXXXXXX"
+                    }
+                    value={cAccountNumber}
+                    onChange={(e) => setCAccountNumber(e.target.value)}
                     className={`border-2 rounded px-4 w-full sm:w-6/12 md:w-4/12 lg:w-3/12 ${
-                      isBankDisabled ? "bg-gray-300" : ""
+                      isCBankDisabled ? "bg-gray-300" : ""
                     }`}
-                    disabled={isBankDisabled}
+                    disabled={isCBankDisabled}
                   />
                 </div>
 
-                {showBankSubmitButton && (
+                {showCBankSubmitButton && (
                   <div className="mt-4">
                     <button
                       className="text-white rounded font-semibold border-2 border-black bg-black px-4 py-1"
-                      onClick={bankSubmitClick}
+                      onClick={cBankSubmitClick}
                     >
                       Submit
                     </button>
