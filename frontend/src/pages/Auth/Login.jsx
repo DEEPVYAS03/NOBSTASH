@@ -1,10 +1,11 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import useAuth from "../../redux/dispatch/useAuth";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import useAuth from '../../redux/dispatch/useAuth';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { Button } from '@/components/ui/button';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 import {
   Form,
@@ -13,8 +14,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { toast } from 'sonner';
 
 const loginFormSchema = z.object({
   email: z.string().email(),
@@ -25,23 +27,33 @@ const Login = () => {
   const nav = useNavigate();
 
   const { auth, login } = useAuth();
+  const [isCaptchaVerifed, setIsCaptchaVerifed] = useState(false);
 
   const loginForm = useForm({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
   });
 
   async function onSubmit(values) {
+    if (!isCaptchaVerifed) {
+      toast.error('Please verify captcha');
+      return;
+    }
     const isSuccessed = await login(values.email, values.password);
     if (isSuccessed) {
-      nav("/");
+      nav('/');
     }
   }
 
-  if (auth.token && auth.user) nav("/");
+  function onChangeCaptacha(value) {
+    console.log('Captcha value:', value);
+    setIsCaptchaVerifed(true);
+  }
+
+  if (auth.token && auth.user) nav('/');
 
   return (
     <div className="flex h-screen min-h-screen w-full flex-col items-center justify-center">
@@ -68,7 +80,10 @@ const Login = () => {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="email" {...field} />
+                  <Input
+                    placeholder="email"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -82,46 +97,64 @@ const Login = () => {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="password" {...field} type="password" />
+                  <Input
+                    placeholder="password"
+                    {...field}
+                    type="password"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button type="submit" className="w-full">
+          <ReCAPTCHA
+            sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+            onChange={onChangeCaptacha}
+          />
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={!isCaptchaVerifed}
+          >
             Continue
           </Button>
-        </form>{" "}
+        </form>{' '}
       </Form>
 
       <p className="mt-5 cursor-pointer text-center text-sm text-gray-600">
-        Not have an account?{" "}
+        Not have an account?{' '}
         <Button
           variant="link"
           className="px-0 font-semibold underline"
-          onClick={() => nav("/signup")}
+          onClick={() => nav('/signup')}
         >
           Signup
-        </Button>{" "}
+        </Button>{' '}
         here
       </p>
 
       <Button
         variant="link"
         className="text-sm underline"
-        onClick={() => nav("/forgot-password")}
+        onClick={() => nav('/forgot-password')}
       >
         Forgot Password
       </Button>
 
       <p className="mt-5 text-center text-xs text-gray-500">
-        By clicking continue, you agree to our{" "}
-        <Button variant="link" className="p-0 text-xs">
-          {" "}
+        By clicking continue, you agree to our{' '}
+        <Button
+          variant="link"
+          className="p-0 text-xs"
+        >
+          {' '}
           Terms of Service
-        </Button>{" "}
-        and{" "}
-        <Button variant="link" className="p-0 text-xs">
+        </Button>{' '}
+        and{' '}
+        <Button
+          variant="link"
+          className="p-0 text-xs"
+        >
           Privacy Policy
         </Button>
       </p>

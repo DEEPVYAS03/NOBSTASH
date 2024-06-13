@@ -1,12 +1,13 @@
 // @ts-ignore
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../redux/dispatch/useAuth';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 import {
   Form,
@@ -33,6 +34,7 @@ const SignupForm = () => {
   const nav = useNavigate();
 
   const { auth, signup } = useAuth();
+  const [isCaptchaVerifed, setIsCaptchaVerifed] = useState(false);
 
   const signupForm = useForm({
     resolver: zodResolver(signupFormSchema),
@@ -64,9 +66,10 @@ const SignupForm = () => {
     }
   }
 
-  React.useEffect(() => {
-    console.log(auth);
-  }, [auth]);
+  function onChangeCaptacha(value) {
+    console.log('Captcha value:', value);
+    setIsCaptchaVerifed(true);
+  }
 
   return (
     <div className="flex h-screen min-h-screen w-full flex-col items-center justify-center">
@@ -171,9 +174,16 @@ const SignupForm = () => {
               </FormItem>
             )}
           />
+
+          <ReCAPTCHA
+            sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+            onChange={onChangeCaptacha}
+          />
+
           <Button
             type="submit"
             className="w-full"
+            disabled={!isCaptchaVerifed}
           >
             Sign Up with Email
           </Button>
