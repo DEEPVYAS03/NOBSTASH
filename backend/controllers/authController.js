@@ -52,15 +52,15 @@ exports.signup = async (req, res) => {
       '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$'
     );
 
-    if (!password.match(passwordRegExp)) {
+    if (!passwordRegExp.test(password)) {
       return res.status(400).send('Password must be 6 characters long');
     }
 
-    if (!phone.match(phoneRegExp)) {
+    if (!phoneRegExp.test(phone)) {
       return res.status(400).send('Phone number must be 10 digits');
     }
 
-    if (!username.match(usernameRegExp)) {
+    if (!usernameRegExp.test(username)) {
       return res
         .status(400)
         .send(
@@ -68,7 +68,7 @@ exports.signup = async (req, res) => {
         );
     }
 
-    if (!email.match(emailRegExp)) {
+    if (!emailRegExp.test(email)) {
       return res.status(400).send('Please enter a valid email address');
     }
 
