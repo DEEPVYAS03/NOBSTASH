@@ -82,27 +82,29 @@ function Profile() {
   return (
     <>
       <div className="flex h-screen w-full">
-        <div className="h-full"></div>
-        <div className="flex w-full flex-col items-center">
+        <div className="flex w-full flex-col items-center mt-10">
           <h2 className="text-2xl font-bold">Profile</h2>
 
           <Form {...profileForm}>
             <form
               onSubmit={profileForm.handleSubmit(onSubmit)}
-              className="container mt-10 w-full max-w-sm space-y-4"
+              className="container mt-10 w-full max-w-lg space-y-6 h-full"
             >
               <FormField
                 control={profileForm.control}
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="name"
-                        {...field}
-                      />
-                    </FormControl>
+                    <div className="flex items-center justify-between w-full space-x-6">
+                      <FormLabel>Name</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="name"
+                          {...field}
+                          className="max-w-xs "
+                        />
+                      </FormControl>
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -112,14 +114,17 @@ function Profile() {
                 name="username"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Username</FormLabel>
-                    <FormControl>
-                      <Input
-                        disabled
-                        placeholder="username"
-                        {...field}
-                      />
-                    </FormControl>
+                    <div className="flex items-center justify-between w-full space-x-6">
+                      <FormLabel>Username</FormLabel>
+                      <FormControl>
+                        <Input
+                          disabled
+                          placeholder="username"
+                          {...field}
+                          className="max-w-xs "
+                        />
+                      </FormControl>
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -129,13 +134,17 @@ function Profile() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="email"
-                        {...field}
-                      />
-                    </FormControl>
+                    <div className="flex items-center justify-between space-x-6">
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input
+                          disabled
+                          placeholder="email"
+                          {...field}
+                          className="max-w-xs "
+                        />
+                      </FormControl>
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -145,14 +154,17 @@ function Profile() {
                 name="mobile"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Mobile</FormLabel>
-                    <FormControl>
-                      <Input
-                        disabled
-                        placeholder="mobile"
-                        {...field}
-                      />
-                    </FormControl>
+                    <div className="flex items-center justify-between space-x-6">
+                      <FormLabel>Mobile</FormLabel>
+                      <FormControl>
+                        <Input
+                          disabled
+                          placeholder="mobile"
+                          {...field}
+                          className="max-w-xs "
+                        />
+                      </FormControl>
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -162,13 +174,16 @@ function Profile() {
                 name="address"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Address</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="address"
-                        {...field}
-                      />
-                    </FormControl>
+                    <div className="flex items-center justify-between space-x-6">
+                      <FormLabel>Address</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="address"
+                          {...field}
+                          className="max-w-xs "
+                        />
+                      </FormControl>
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -178,18 +193,26 @@ function Profile() {
                 name="pincode"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Pincode</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="pincode"
-                        {...field}
-                      />
-                    </FormControl>
+                    <div className="flex items-center justify-between space-x-6">
+                      <FormLabel>Pincode</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="pincode"
+                          {...field}
+                          className="max-w-xs "
+                        />
+                      </FormControl>
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button variant="outline">Save Details</Button>
+              <Button
+                variant="outline"
+                className="mt-4"
+              >
+                Save Details
+              </Button>
             </form>
           </Form>
         </div>

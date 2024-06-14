@@ -32,8 +32,6 @@ exports.signup = async (req, res) => {
       $or: [{ userName: username }, { email: email }, { phone: phone }],
     });
 
-    console.log(user);
-
     if (user) {
       if (user.userName === username) {
         return res.status(400).send('Username already exists');
@@ -45,6 +43,33 @@ exports.signup = async (req, res) => {
       if (user.phone === phone) {
         return res.status(400).send('Phone number already exists');
       }
+    }
+
+    const passwordRegExp = new RegExp('^[a-zA-Z0-9!@#$%^&*()_+]{6,50}$');
+    const phoneRegExp = new RegExp('^[0-9]{10}$');
+    const usernameRegExp = new RegExp('^[a-z0-9_]{3,50}$');
+    const emailRegExp = new RegExp(
+      '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$'
+    );
+
+    if (!password.match(passwordRegExp)) {
+      return res.status(400).send('Password must be 6 characters long');
+    }
+
+    if (!phone.match(phoneRegExp)) {
+      return res.status(400).send('Phone number must be 10 digits');
+    }
+
+    if (!username.match(usernameRegExp)) {
+      return res
+        .status(400)
+        .send(
+          'Username can only contain lowercase letters, numbers, and underscores.'
+        );
+    }
+
+    if (!email.match(emailRegExp)) {
+      return res.status(400).send('Please enter a valid email address');
     }
 
     const salt = await bcrypt.genSalt(10);
